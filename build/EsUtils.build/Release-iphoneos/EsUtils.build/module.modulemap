@@ -1,0 +1,6 @@
+framework module EsUtils {
+  umbrella header "EsUtils.h"
+
+  export *
+  module * { export * }
+}
