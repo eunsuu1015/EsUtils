@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CommonCrypto/CommonCryptor.h>
+#import <CommonCrypto/CommonDigest.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-static NSString *keyTagPub = @"com.authlabs.encrypt.pubkey";    // 200728 com.authlabs.encrypt.test.pubkey 이었는데 test 삭제
-static NSString *keyTagPri = @"com.authlabs.encrypt.prikey";    // 200728 com.authlabs.encrypt.test.prikey 이었는데 test 삭제
+static NSString *keyTagPub = @"com.es1015.encrypt.pubkey";
+static NSString *keyTagPri = @"com.es1015.encrypt.prikey";
     
 
 typedef void (^RSACompletionBlock2)(void);

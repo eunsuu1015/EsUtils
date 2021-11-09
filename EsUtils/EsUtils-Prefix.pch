@@ -10,6 +10,7 @@
 #define EsUtils_Prefix_h
 
 #import "Constants.h"
+#import "ErrorMgr.h"
 #import <UIKit/UIKit.h>
 
 #endif /* EsUtils_Prefix_h */

@@ -15,7 +15,6 @@
 /// String -> Hex로 변환
 /// @param string Hex로 변환할 텍스트
 +(NSString*)stringToHex:(nonnull NSString *)string {
-    if (IS_DEBUG_LOG) NSLog(@"%s start. string : %@", __FUNCTION__, string);
     NSMutableString *hexString = [[NSMutableString alloc] init];
     @try {
         // String -> Hex String (정상적인 hex가 맞는지 확인 필요)
@@ -29,29 +28,24 @@
         free(chars);
         
     } @catch (NSException *exception) {
-        if (IS_DEBUG_LOG) NSLog(@"%s exception : %@", __FUNCTION__, exception.description);
+        NSLog(@"%s exception : %@", __FUNCTION__, exception.description);
         hexString = nil;
         
     }
-    if (IS_DEBUG_LOG) NSLog(@"%s end. return : %@", __FUNCTION__, hexString);
     return hexString;
 }
 
 /// Data -> String
 /// @param data String으로 변경할 Data
 +(NSString*)stringToUTF8Data:(nonnull NSData *)data {
-    if (IS_DEBUG_LOG) NSLog(@"%s start", __FUNCTION__);
     NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    if (IS_DEBUG_LOG) NSLog(@"%s end. return : %@", __FUNCTION__, str);
     return str;
 }
 
 /// String -> Data
 /// @param string Data로 변경할 String
 +(NSData*)utf8DataToString:(nonnull NSString *) string {
-    if (IS_DEBUG_LOG) NSLog(@"%s start. string : %@", __FUNCTION__, string);
     NSDate *data = [string dataUsingEncoding:NSUTF8StringEncoding];
-    if (IS_DEBUG_LOG) NSLog(@"%s end", __FUNCTION__);
     return data;
 }
 
@@ -61,32 +55,28 @@
 /// Base64 인코딩
 /// @param plainString 평문
 +(NSString*)encodeBase64:(nonnull NSString*)plainString {
-    if (IS_DEBUG_LOG) NSLog(@"%s start. plainString : %@", __FUNCTION__, plainString);
     NSString *base64String = nil;
     @try {
         NSData *plainData = [plainString dataUsingEncoding:NSUTF8StringEncoding];
         base64String = [plainData base64EncodedStringWithOptions:0];
     } @catch (NSException *exception) {
-        if (IS_DEBUG_LOG) NSLog(@"%s exception : %@", __FUNCTION__, exception.description);
+        NSLog(@"%s exception : %@", __FUNCTION__, exception.description);
         base64String = nil;
     }
-    if (IS_DEBUG_LOG) NSLog(@"%s end. return : %@", __FUNCTION__, base64String);
     return base64String;
 }
 
 /// Base64 디코딩
 /// @param base64String Base64 인코딩된 텍스트
 +(NSString*)decodeBase64:(nonnull NSString*)base64String {
-    if (IS_DEBUG_LOG) NSLog(@"%s start. base64String : %@", __FUNCTION__, base64String);
     NSString *decodedString = nil;
     @try {
         NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:base64String options:0];
         decodedString = [[NSString alloc] initWithData:decodedData encoding:NSUTF8StringEncoding];
     } @catch (NSException *exception) {
-        if (IS_DEBUG_LOG) NSLog(@"%s exception : %@", __FUNCTION__, exception.description);
+        NSLog(@"%s exception : %@", __FUNCTION__, exception.description);
         decodedString = nil;
     }
-    if (IS_DEBUG_LOG) NSLog(@"%s end. return : %@", __FUNCTION__, decodedString);
     return decodedString;
 }
 

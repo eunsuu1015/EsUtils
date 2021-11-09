@@ -51,7 +51,7 @@
         if (error) {
             NSLog(@"error : %@", error.description);
         } else {
-        result = [json objectForKey:key];
+            result = [json objectForKey:key];
         }
     } @catch (NSException *exception) {
         NSLog(@"exception : %@", exception.description);
@@ -76,7 +76,7 @@
         if (error) {
             NSLog(@"error : %@", error.description);
         } else {
-        result = [json objectForKey:key];
+            result = [json objectForKey:key];
         }
     } @catch (NSException *exception) {
         NSLog(@"exception : %@", exception.description);
@@ -102,15 +102,15 @@
             NSLog(@"error : %@", error.description);
             result = 0;
         } else {
-        
-        NSString *strResult = [json objectForKey:key];
-        if (strResult == nil) {
-            NSLog(@"값 가져오기 실패");
-            result = 0;
-        } else {
-
-            result = [strResult intValue];
-        }
+            
+            NSString *strResult = [json objectForKey:key];
+            if (strResult == nil) {
+                NSLog(@"값 가져오기 실패");
+                result = 0;
+            } else {
+                
+                result = [strResult intValue];
+            }
         }
         
     } @catch (NSException *exception) {
@@ -131,7 +131,7 @@
     NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
     
     if (error) {
-        if (IS_DEBUG_LOG) NSLog(@"[ERROR] error : %@", error.description);
+        NSLog(@"[ERROR] error : %@", error.description);
         return nil;
     }
     return [json objectForKey:key];
@@ -164,7 +164,7 @@
         if (data == nil) {
             NSLog(@"NSData로 변경 실패");
         } else {
-        result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         }
     } @catch (NSException *exception) {
         NSLog(@"exception : %@", exception.description);
@@ -229,13 +229,13 @@
 // JSON에서 key값을 제외한 JSON을 다시 생성
 //LInkedHashMap / NSSortDescriptor
 +(NSString *)jsonStringRemoveKey:(NSString*)key jsonString:(NSString*)jsonString {
-    if (IS_DEBUG_LOG) NSLog(@"start");
+    NSLog(@"start");
     @try {
         // 200401 json 공백과 줄바꿈 제거
         jsonString = [jsonString stringByReplacingOccurrencesOfString:@" " withString:@""];
         jsonString = [jsonString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
         
-        if (IS_DEBUG_LOG) NSLog(@"공백/줄바꿈 치환 후 json : %@", jsonString);
+        NSLog(@"공백/줄바꿈 치환 후 json : %@", jsonString);
         NSString *tmp = [jsonString substringFromIndex:1];
         
         tmp = [tmp substringToIndex:tmp.length-1];
@@ -246,7 +246,7 @@
         
         for (int i = 0; i < arr.count - 1; i++) {
             NSString *value = [arr objectAtIndex:i];
-            if (IS_DEBUG_LOG) NSLog(@"value : %@", value);
+            NSLog(@"value : %@", value);
             if (![value containsString:key]) {
                 [newJson appendString:value];
                 [newJson appendString:@","];
@@ -254,14 +254,14 @@
         }
         
         NSString *resultStr = [newJson substringToIndex:newJson.length-1];
-        if (IS_DEBUG_LOG) NSLog(@"resultStr : %@", resultStr);
+        NSLog(@"resultStr : %@", resultStr);
         resultStr = [NSString stringWithFormat:@"{%@}", resultStr];
-        if (IS_DEBUG_LOG) NSLog(@"최종 json : %@", resultStr);
+        NSLog(@"최종 json : %@", resultStr);
         
         return resultStr;
         
     } @catch (NSException *exception) {
-        if (IS_DEBUG_LOG) NSLog(@"exception : %@", exception.description);
+        NSLog(@"exception : %@", exception.description);
     }
     return nil;
 }

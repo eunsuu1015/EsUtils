@@ -7,21 +7,27 @@
 //
 
 #import "EncAES.h"
+#import "EncUtil.h"
 #import <CommonCrypto/CommonCryptor.h>
 
 @implementation EncAES
 
-#pragma mark - AES 암호화 최종 호출 함수
+#pragma mark - enc
+
++(NSString*)encryptString:(NSString*)keys iv:(char*)iv plainText:(NSString*)plainText keySize:(int)keySize {
+    NSData *plainData = [EncUtil encodeUTF8:plainText];
+    NSData *result = [self encrypt:keys iv:iv plainText:plainData keySize:keySize];
+    return [EncUtil encodeB64ToString:result];
+}
 
 +(NSData*)encrypt:(NSString*)keys iv:(char*)iv plainText:(NSData*)plainText keySize:(int)keySize {
-    
     if (keys == nil) {
-        // KSLOG_ERROR(@"키 없음");
+        [ErrorMgr.sharedInstance setErrCode:ERROR_NULL_KEY];
         return nil;
     }
-        
+    
     if (plainText == nil) {
-        // KSLOG_ERROR(@"값 없음");
+        [ErrorMgr.sharedInstance setErrCode:ERROR_NULL_PARAM];
         return nil;
     }
     
@@ -40,13 +46,13 @@
     NSData *valueData = plainText;
     
     NSUInteger dataLength = [valueData length];
-//    size_t     bufferSize = dataLength + kCCBlockSizeAES128;  // 200727 keySize로 변경
+    //    size_t     bufferSize = dataLength + kCCBlockSizeAES128;  // 200727 keySize로 변경
     size_t     bufferSize = dataLength + keySize;
     void      *buffer     = malloc(bufferSize);
     //    const unsigned char iv[] = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
     
     CCCryptorStatus result = CCCrypt( kCCEncrypt,
-//                                     kCCAlgorithmAES128,  // 200727 keySize로 변경
+                                     //                                     kCCAlgorithmAES128,  // 200727 keySize로 변경
                                      keySize,
                                      kCCOptionPKCS7Padding,
                                      keyPtr,
@@ -65,15 +71,23 @@
     return nil;
 }
 
+#pragma mark - dec
+
++(NSString*)decryptString:(NSString*)keys iv:(char*)iv encText:(NSString*)encText keySize:(int)keySize {
+    NSData *encData = [EncUtil encodeB64StringToData:encText];
+    NSData *result = [self decrypt:keys iv:iv encText:encData keySize:keySize];
+    return [EncUtil decodeUTF8:result];
+}
+
 +(NSData*)decrypt:(NSString*)keys iv:(char*)iv encText:(NSData*)encText keySize:(int)keySize {
     
     if (keys == nil) {
-        // KSLOG_ERROR(@"키 없음");
+        [ErrorMgr.sharedInstance setErrCode:ERROR_NULL_KEY];
         return nil;
     }
-        
+    
     if (encText == nil) {
-        // KSLOG_ERROR(@"값 없음");
+        [ErrorMgr.sharedInstance setErrCode:ERROR_NULL_PARAM];
         return nil;
     }
     
@@ -91,14 +105,14 @@
     NSData *valueData = encText;
     
     NSUInteger dataLength     = [valueData length];
-//    size_t     bufferSize     = dataLength + kCCBlockSizeAES128;  // 200727 keySize로 변경
+    //    size_t     bufferSize     = dataLength + kCCBlockSizeAES128;  // 200727 keySize로 변경
     size_t     bufferSize     = dataLength + keySize;
     void      *buffer_decrypt = malloc(bufferSize);
     //    const unsigned char iv[] = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
     
     size_t numBytesDecrypted    = 0x00;
     CCCryptorStatus result = CCCrypt( kCCDecrypt,
-//                                     kCCAlgorithmAES128,  // 200727 keySize로 변경
+                                     //                                     kCCAlgorithmAES128,  // 200727 keySize로 변경
                                      keySize,
                                      kCCOptionPKCS7Padding,
                                      keyPtr,
@@ -111,7 +125,7 @@
     if( result == kCCSuccess )
         return [NSData dataWithBytesNoCopy:buffer_decrypt length:numBytesDecrypted];
     else
-//       // KSLOG_DEBUG(@"복호화 실패");
+        //       // KSLOG_DEBUG(@"복호화 실패");
         
         return nil;
 }

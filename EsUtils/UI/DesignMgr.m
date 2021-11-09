@@ -55,7 +55,7 @@
 /// @param opacity 불투명정도
 /// @param radius 반경?
 +(void)addShadow:(id)viewId color:(UIColor*)color opacity:(float)opacity radius:(float)radius {
-    if (IS_DEBUG_LOG) NSLog(@"%s start. opacity : %f / radius : %f", __FUNCTION__, opacity, radius);
+    NSLog(@"%s start. opacity : %f / radius : %f", __FUNCTION__, opacity, radius);
     @try {
         // 뷰 그림자 효과
         UIView *view = (UIView*)viewId;
@@ -67,9 +67,9 @@
         [view.layer setShadowRadius:radius];
         [view.layer setShadowPath:shadowPath.CGPath];
     } @catch (NSException *exception) {
-        if (IS_DEBUG_LOG) NSLog(@"%s exception : %@", __FUNCTION__, exception.description);
+        NSLog(@"%s exception : %@", __FUNCTION__, exception.description);
     }
-    if (IS_DEBUG_LOG) NSLog(@"%s end", __FUNCTION__);
+    NSLog(@"%s end", __FUNCTION__);
 }
 
 
@@ -78,7 +78,7 @@
 /// @param text 텍스트
 /// @param textColor 텍스트 색상
 +(void)addBtnUnderline:(UIButton*)btn text:(NSString*)text textColor:(UIColor*)textColor {
-    if (IS_DEBUG_LOG) NSLog(@"%s start. text : %@", __FUNCTION__, text);
+    NSLog(@"%s start. text : %@", __FUNCTION__, text);
     @try {
         NSMutableAttributedString *commentString = [[NSMutableAttributedString alloc] initWithString:text];
         
@@ -89,9 +89,9 @@
         [btn setAttributedTitle:commentString forState:UIControlStateNormal];
         
     } @catch (NSException *exception) {
-        if (IS_DEBUG_LOG) NSLog(@"%s exception : %@", __FUNCTION__, exception.description);
+        NSLog(@"%s exception : %@", __FUNCTION__, exception.description);
     }
-    if (IS_DEBUG_LOG) NSLog(@"%s end", __FUNCTION__);
+    NSLog(@"%s end", __FUNCTION__);
 }
 
 
@@ -99,28 +99,28 @@
 /// @param viewId 라운드 처리할 뷰
 /// @param radius 라운드 정도
 +(void)addRadius:(id)viewId radius:(int)radius {
-    if (IS_DEBUG_LOG) NSLog(@"%s start. radius : %d", __FUNCTION__, radius);
+    NSLog(@"%s start. radius : %d", __FUNCTION__, radius);
     @try {
         UIView *view = (UIView*)viewId;
         view.clipsToBounds = YES;
         view.layer.cornerRadius = radius;
     } @catch (NSException *exception) {
-        if (IS_DEBUG_LOG) NSLog(@"%s exception : %@", __FUNCTION__, exception.description);
+        NSLog(@"%s exception : %@", __FUNCTION__, exception.description);
     }
-    if (IS_DEBUG_LOG) NSLog(@"%s end", __FUNCTION__);
+    NSLog(@"%s end", __FUNCTION__);
 }
 
 /// 뷰를 원모양으로 만들기
 /// @param viewId 원모양으로 만들 뷰
 +(void)makeCircle:(id)viewId {
-    if (IS_DEBUG_LOG) NSLog(@"%s start", __FUNCTION__);
+    NSLog(@"%s start", __FUNCTION__);
     @try {
         UIView *view = (UIView*)viewId;
         view.layer.cornerRadius = view.frame.size.width/2;
     } @catch (NSException *exception) {
-        if (IS_DEBUG_LOG) NSLog(@"%s exception : %@", __FUNCTION__, exception.description);
+        NSLog(@"%s exception : %@", __FUNCTION__, exception.description);
     }
-    if (IS_DEBUG_LOG) NSLog(@"%s end", __FUNCTION__);
+    NSLog(@"%s end", __FUNCTION__);
 }
 
 

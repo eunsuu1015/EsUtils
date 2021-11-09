@@ -16,15 +16,17 @@
 #pragma mark - POST
 
 /// 파라미터가 String 형식 (JSON)
-+(void)postJSONString:(NSString*)url param:(NSString*)param header:(nullable NSDictionary*)header urlSession:(nullable id <NSURLSessionDelegate>)urlSession success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure {
++(void)postJSONString:(NSString*)url param:(NSString*)param header:(nullable NSDictionary*)header timeout:(int)timeout urlSession:(nullable id <NSURLSessionDelegate>)urlSession
+              success:(void (^)(id responseObject))success
+              failure:(void (^)(NSError *error))failure {
     
     // String -> Data
     NSData *dataParam = nil;
     if (param != nil) {
         dataParam = [param dataUsingEncoding:NSUTF8StringEncoding];
     }
-        
-    [self post:url param:dataParam isJson:YES header:header urlSession:urlSession success:^(id  _Nonnull responseObject) {
+    
+    [self post:url param:dataParam isJson:YES header:header timeout:timeout urlSession:urlSession success:^(id  _Nonnull responseObject) {
         success(responseObject);
     } failure:^(NSError * _Nonnull error) {
         failure(error);
@@ -32,7 +34,9 @@
 }
 
 /// 파라미터가 Dictionary 형식 (JSON)
-+(void)postJSONDic:(NSString*)url param:(NSDictionary*)param header:(nullable NSDictionary*)header urlSession:(nullable id <NSURLSessionDelegate>)urlSession success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure {
++(void)postJSONDic:(NSString*)url param:(NSDictionary*)param header:(nullable NSDictionary*)header timeout:(int)timeout urlSession:(nullable id <NSURLSessionDelegate>)urlSession
+           success:(void (^)(id responseObject))success
+           failure:(void (^)(NSError *error))failure {
     
     // Dic -> String -> Data
     NSData *dataParam = nil;
@@ -42,7 +46,7 @@
         dataParam = [strParam dataUsingEncoding:NSUTF8StringEncoding];
     }
     
-    [self post:url param:dataParam isJson:YES header:header urlSession:urlSession success:^(id  _Nonnull responseObject) {
+    [self post:url param:dataParam isJson:YES header:header timeout:timeout urlSession:urlSession success:^(id  _Nonnull responseObject) {
         success(responseObject);
     } failure:^(NSError * _Nonnull error) {
         failure(error);
@@ -50,9 +54,11 @@
 }
 
 /// 파라미터가 Data 형식 (JSON)
-+(void)postJSONData:(NSString*)url param:(NSData*)param header:(nullable NSDictionary*)header urlSession:(nullable id <NSURLSessionDelegate>)urlSession success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure {
++(void)postJSONData:(NSString*)url param:(NSData*)param header:(nullable NSDictionary*)header timeout:(int)timeout urlSession:(nullable id <NSURLSessionDelegate>)urlSession
+            success:(void (^)(id responseObject))success
+            failure:(void (^)(NSError *error))failure {
     
-    [self post:url param:param isJson:YES header:header urlSession:urlSession success:^(id  _Nonnull responseObject) {
+    [self post:url param:param isJson:YES header:header timeout:timeout urlSession:urlSession success:^(id  _Nonnull responseObject) {
         success(responseObject);
     } failure:^(NSError * _Nonnull error) {
         failure(error);
@@ -62,21 +68,18 @@
 
 #pragma mark - 최종적으로 호출하는 공통 함수
 
-+(void)post:(NSString *)url param:(NSData *)param isJson:(BOOL)isJson header:(nullable NSDictionary*)header urlSession:(nullable id <NSURLSessionDelegate>)urlSession success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure {
++(void)post:(NSString *)url param:(NSData *)param isJson:(BOOL)isJson header:(nullable NSDictionary*)header timeout:(int)timeout urlSession:(nullable id <NSURLSessionDelegate>)urlSession
+    success:(void (^)(id responseObject))success
+    failure:(void (^)(NSError *error))failure {
     
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
-    [urlRequest setTimeoutInterval:10];
+    [urlRequest setTimeoutInterval:timeout];
     [urlRequest setHTTPMethod:@"POST"];
     
     NSMutableDictionary *dicHeader = [HttpUtls setDefaultDic:isJson];
     [dicHeader addEntriesFromDictionary:header];
     
-    NSArray *arrHeader = [dicHeader allKeys];
-    for (int i = 0; i < arrHeader.count; i++) {
-        NSString *key = arrHeader[i];
-        NSString *value = [dicHeader objectForKey:key];
-        [urlRequest addValue:value forHTTPHeaderField:key];
-    }
+    urlRequest = [HttpUtls addOsHeader:dicHeader urlRequest:urlRequest];
     
     if (param != nil) {
         [urlRequest setHTTPBody:param];

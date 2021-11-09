@@ -15,8 +15,7 @@
 /// 저장 String
 /// @param key 키
 /// @param value 값
-+(void) saveUdString:(NSString*)key value:(NSString*)value {
-    NSLog(@"start. key : %@ / value : %@", key, value);
++(void)saveUdString:(NSString*)key value:(NSString*)value {
     @try {
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setObject:value forKey:key];
@@ -28,12 +27,10 @@
 
 /// 조회 String
 /// @param key 키
-+(NSString *) loadUdString:(NSString*)key {
-    NSLog(@"start. key : %@", key);
++(NSString *)loadUdString:(NSString*)key {
     @try {
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         NSString *getData = [userDefaults objectForKey:key];
-        NSLog(@"end. return : %@", getData);
         return getData;
         
     } @catch (NSException *exception) {
@@ -45,23 +42,21 @@
 
 #pragma mark - Int
 
-/// 조회 Int
-/// @param key 키
-+(NSInteger) loadUdInt:(NSString*)key {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSInteger getData = [userDefaults integerForKey:key];
-    NSLog(@"end. return : %ld", (long)getData);
-    return getData;
-}
-
-
 /// 저장 Int
 /// @param key 키
 /// @param value 값
-+(void) saveUdInt:(NSString*)key value:(NSInteger)value {
++(void)saveUdInt:(NSString*)key value:(NSInteger)value {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setInteger:value forKey:key];
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+/// 조회 Int
+/// @param key 키
++(NSInteger)loadUdInt:(NSString*)key {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger getData = [userDefaults integerForKey:key];
+    return getData;
 }
 
 
@@ -69,8 +64,7 @@
 
 /// 삭제
 /// @param key 키
-+(void) deleteUdString:(NSString*)key {
-    NSLog(@"start. key : %@", key);
++(void)deleteUd:(NSString*)key {
     @try {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:key];
         [[NSUserDefaults standardUserDefaults] synchronize];

@@ -33,22 +33,21 @@
 }
 
 /// JSON, Query String 형식에 맞는 헤더 추가
-/// @param isJson <#isJson description#>
 +(NSMutableDictionary*)setDefaultDic:(BOOL)isJson {
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     if (isJson) {   // JSON
         [dic setObject:@"application/json; charset=UTF-8" forKey:@"Content-Type"];
-        [dic setObject:@"application/json" forKey:@"accept"];
         
     } else {        // Query String        
         [dic setObject:@"application/x-www-form-urlencoded; charset=UTF-8" forKey:@"Content-Type"];
     }
+    // TODO: 적용 되는지, 문제 없는지 확인 필요
+    [dic setObject:@"application/json; text/json; text/javascript; text/html" forKey:@"accept"];
     return dic;
 }
 
-// header dic에 있는걸 sessionManager.requestSerializer 에 넣어야함.
-+(AFHTTPSessionManager*)setHeader:(NSDictionary*)dic sessionManager:(AFHTTPSessionManager *)sessionManager {
-    // dic에 있는걸 sessionManager.requestSerializer 에 넣어야함.
+/// header를 sessionManager에 추가
++(AFHTTPSessionManager*)setLibHeader:(NSDictionary*)dic sessionManager:(AFHTTPSessionManager *)sessionManager {
     NSArray *arrHeader = [dic allKeys];
     for (int i = 0; i < arrHeader.count; i++) {
         NSString *key = arrHeader[i];
@@ -56,6 +55,17 @@
         [sessionManager.requestSerializer setValue:value forHTTPHeaderField:key];
     }
     return sessionManager;
+}
+
+/// header를 urlRequest에 추가
++(NSMutableURLRequest*)addOsHeader:(NSDictionary*)dic urlRequest:(NSMutableURLRequest*)urlRequest {
+    NSArray *arrHeader = [dic allKeys];
+    for (int i = 0; i < arrHeader.count; i++) {
+        NSString *key = arrHeader[i];
+        NSString *value = [dic objectForKey:key];
+        [urlRequest addValue:value forHTTPHeaderField:key];
+    }
+    return urlRequest;
 }
 
 

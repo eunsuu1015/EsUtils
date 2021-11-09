@@ -39,9 +39,7 @@ if (!(X)) {                \
 
 
 -(instancetype)init {
-    
     if (self = [super init]) {
-        // KSLOG_DEBUG(@"%s start", __FUNCTION__);
         cryptoQueue = [[NSOperationQueue alloc] init];
         kSecAttrKeySizeInBitsLength = 2048;
     }
@@ -57,10 +55,7 @@ if (!(X)) {                \
     
     // 에러 체크, 추가
     if (key == nil) {
-//        AuthManager *lm = [AuthManager getInstance];
-//                [lm setErrorCode:LM_NO_REG_RSA_KEY];
-//                [lm setErrorText:LM_NO_REG_RSA_KEY_TXT];
-//                // KSLOG_DEBUG(@"%s errorCode : %d / errorText : %@", __FUNCTION__, [lm getErrorCode], [lm getErrorText]);
+        [ErrorMgr.sharedInstance setErrCode:ERROR_NULL_KEY];
         return nil;
     }
     
@@ -99,7 +94,7 @@ if (!(X)) {                \
     }
     if (cipherBuffer) free(cipherBuffer);
     
-//    return [encryptedData base64EncodedStringWithOptions:0];
+    //    return [encryptedData base64EncodedStringWithOptions:0];
     return encryptedData;
 }
 
@@ -110,10 +105,7 @@ if (!(X)) {                \
     
     // 에러 체크, 추가
     if (key == nil) {
-//        AuthManager *lm = [AuthManager getInstance];
-//                [lm setErrorCode:LM_NO_REG_RSA_KEY];
-//                [lm setErrorText:LM_NO_REG_RSA_KEY_TXT];
-//                // KSLOG_DEBUG(@"%s errorCode : %d / errorText : %@", __FUNCTION__, [lm getErrorCode], [lm getErrorText]);
+        [ErrorMgr.sharedInstance setErrCode:ERROR_NULL_KEY];
         return nil;
     }
     
@@ -174,11 +166,7 @@ if (!(X)) {                \
     
     // 에러 체크, 추가
     if (key == nil) {
-        // KSLOG_DEBUG(@"%s key nil", __FUNCTION__);
-//        AuthManager *lm = [AuthManager getInstance];
-//                [lm setErrorCode:LM_NO_REG_RSA_KEY];
-//                [lm setErrorText:LM_NO_REG_RSA_KEY_TXT];
-//                // KSLOG_DEBUG(@"%s errorCode : %d / errorText : %@", __FUNCTION__, [lm getErrorCode], [lm getErrorText]);
+        [ErrorMgr.sharedInstance setErrCode:ERROR_NULL_KEY];
         return nil;
     }
     
@@ -222,11 +210,7 @@ if (!(X)) {                \
     
     // 에러 체크, 추가
     if (key == nil) {
-        // KSLOG_DEBUG(@"%s key nil", __FUNCTION__);
-//        AuthManager *lm = [AuthManager getInstance];
-//                [lm setErrorCode:LM_NO_REG_RSA_KEY];
-//                [lm setErrorText:LM_NO_REG_RSA_KEY_TXT];
-//                // KSLOG_DEBUG(@"%s errorCode : %d / errorText : %@", __FUNCTION__, [lm getErrorCode], [lm getErrorText]);
+        [ErrorMgr.sharedInstance setErrCode:ERROR_NULL_KEY];
         return nil;
     }
     
@@ -352,10 +336,10 @@ if (!(X)) {                \
     sanityCheck = SecKeyGeneratePair((__bridge CFDictionaryRef)keyPairAttr, &publicKeyRef, &privateKeyRef);
     // 키쌍 생성 여부 확인, 추가
     if (publicKeyRef == nil || privateKeyRef == nil) {
-//        AuthManager *lm = [AuthManager getInstance];
-//                [lm setErrorCode:LM_FAIL_GEN_RSA_KEY];
-//                [lm setErrorText:LM_FAIL_GEN_RSA_KEY_TXT];
-//                // KSLOG_DEBUG(@"%s errorCode : %d / errorText : %@", __FUNCTION__, [lm getErrorCode], [lm getErrorText]);
+        //        AuthManager *lm = [AuthManager getInstance];
+        //                [lm setErrorCode:LM_FAIL_GEN_RSA_KEY];
+        //                [lm setErrorText:LM_FAIL_GEN_RSA_KEY_TXT];
+        //                // KSLOG_DEBUG(@"%s errorCode : %d / errorText : %@", __FUNCTION__, [lm getErrorCode], [lm getErrorText]);
         // KSLOG_DEBUG(@"%s 키 생성 실패", __FUNCTION__);
         return NO;
     }
@@ -364,6 +348,15 @@ if (!(X)) {                \
     return YES;
 }
 
+
+// 기존에 사용하던 동기식 함수
+- (void)generateRSAKeyPairTest:(void (^)(BOOL isSuccess))success {
+    // KSLOG_DEBUG(@"%s start", __FUNCTION__);
+    NSInvocationOperation * genOp = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(generateKeyPairOperation) object:nil];
+    [cryptoQueue addOperation:genOp];
+    _completion = completion;
+    success
+}
 
 // 기존에 사용하던 동기식 함수
 - (void)generateRSAKeyPair:(RSACompletionBlock2)completion {
@@ -397,9 +390,9 @@ if (!(X)) {                \
     OSStatus sanityCheck = noErr;
     SecKeyRef publicKeyRef = NULL;
     SecKeyRef privateKeyRef = NULL;
-
+    
     int secAttrKeySizeInBitsLength = 2048;
-        
+    
     // First delete current keys.
     [EncRSA deleteKeyPairRSA];
     
@@ -427,17 +420,17 @@ if (!(X)) {                \
     [keyPairAttr setObject:publicKeyAttr forKey:(__bridge id)kSecPublicKeyAttrs];
     
     // SecKeyGeneratePair returns the SecKeyRefs just for educational purposes.
-//    sanityCheck = SecKeyGeneratePair((__bridge CFDictionaryRef)keyPairAttr, &publicKeyRef, &privateKeyRef);
+    //    sanityCheck = SecKeyGeneratePair((__bridge CFDictionaryRef)keyPairAttr, &publicKeyRef, &privateKeyRef);
     sanityCheck = SecKeyGeneratePair((__bridge CFDictionaryRef)keyPairAttr, &publicKeyRef, &privateKeyRef);
     
     // 키쌍 생성 여부 확인, 추가
-//    if (publicKeyRef == nil || privateKeyRef == nil) {
+    //    if (publicKeyRef == nil || privateKeyRef == nil) {
     if (publicKeyRef == nil || privateKeyRef == nil) {
         // KSLOG_DEBUG(@"%s RSA 키쌍 생성 실패. nil", __FUNCTION__);
-//        AuthManager *lm = [AuthManager getInstance];
-//        [lm setErrorCode:LM_FAIL_GEN_RSA_KEY];
-//        [lm setErrorText:LM_FAIL_GEN_RSA_KEY_TXT];
-//        // KSLOG_DEBUG(@"%s errorCode : %d / errorText : %@", __FUNCTION__, [lm getErrorCode], [lm getErrorText]);
+        //        AuthManager *lm = [AuthManager getInstance];
+        //        [lm setErrorCode:LM_FAIL_GEN_RSA_KEY];
+        //        [lm setErrorText:LM_FAIL_GEN_RSA_KEY_TXT];
+        //        // KSLOG_DEBUG(@"%s errorCode : %d / errorText : %@", __FUNCTION__, [lm getErrorCode], [lm getErrorText]);
     }
     
     LOGGING_FACILITY( sanityCheck == noErr && publicKeyRef != NULL && privateKeyRef != NULL, @"Something went wrong with generating the key pair." );
@@ -471,10 +464,10 @@ if (!(X)) {                \
     if (sanityCheck != 0) {
         // KSLOG_DEBUG(@"%s fail private key delete. OSStatus : %ld", __FUNCTION__, (long)sanityCheck);
         // 에러 체크, 추가
-//        AuthManager *lm = [AuthManager getInstance];
-//                [lm setErrorCode:LM_FAIL_DEL_RSA_KEY];
-//                [lm setErrorText:LM_FAIL_DEL_RSA_KEY_TXT];
-//                // KSLOG_DEBUG(@"%s errorCode : %d / errorText : %@", __FUNCTION__, [lm getErrorCode], [lm getErrorText]);
+        //        AuthManager *lm = [AuthManager getInstance];
+        //                [lm setErrorCode:LM_FAIL_DEL_RSA_KEY];
+        //                [lm setErrorText:LM_FAIL_DEL_RSA_KEY_TXT];
+        //                // KSLOG_DEBUG(@"%s errorCode : %d / errorText : %@", __FUNCTION__, [lm getErrorCode], [lm getErrorText]);
         return;
     }
     
@@ -484,15 +477,15 @@ if (!(X)) {                \
     if (sanityCheck != 0) {
         // KSLOG_DEBUG(@"%s fail public key delete. OSStatus : %ld", __FUNCTION__, (long)sanityCheck);
         // 에러 체크, 추가
-//        AuthManager *lm = [AuthManager getInstance];
-//                [lm setErrorCode:LM_FAIL_DEL_RSA_KEY];
-//                [lm setErrorText:LM_FAIL_DEL_RSA_KEY_TXT];
-//                // KSLOG_DEBUG(@"%s errorCode : %d / errorText : %@", __FUNCTION__, [lm getErrorCode], [lm getErrorText]);
+        //        AuthManager *lm = [AuthManager getInstance];
+        //                [lm setErrorCode:LM_FAIL_DEL_RSA_KEY];
+        //                [lm setErrorText:LM_FAIL_DEL_RSA_KEY_TXT];
+        //                // KSLOG_DEBUG(@"%s errorCode : %d / errorText : %@", __FUNCTION__, [lm getErrorCode], [lm getErrorText]);
         return;
     }
     
-//    if (publicKeyRef) CFRelease(publicKeyRef);
-//    if (privateKeyRef) CFRelease(privateKeyRef);
+    //    if (publicKeyRef) CFRelease(publicKeyRef);
+    //    if (privateKeyRef) CFRelease(privateKeyRef);
     // KSLOG_DEBUG(@"%s end",__FUNCTION__);
 }
 
@@ -515,10 +508,10 @@ if (!(X)) {                \
         return YES;
     } else {
         // 키쌍 없는 경우
-//        AuthManager *lm = [AuthManager getInstance];
-//        [lm setErrorCode:LM_NO_REG_RSA_KEY];
-//        [lm setErrorText:LM_NO_REG_RSA_KEY_TXT];
-//        // KSLOG_DEBUG(@"%s errorCode : %d / errorText : %@", __FUNCTION__, [lm getErrorCode], [lm getErrorText]);
+        //        AuthManager *lm = [AuthManager getInstance];
+        //        [lm setErrorCode:LM_NO_REG_RSA_KEY];
+        //        [lm setErrorText:LM_NO_REG_RSA_KEY_TXT];
+        //        // KSLOG_DEBUG(@"%s errorCode : %d / errorText : %@", __FUNCTION__, [lm getErrorCode], [lm getErrorText]);
         // KSLOG_DEBUG(@"%s return : N #", __FUNCTION__);
         return NO;
     }
@@ -528,23 +521,19 @@ if (!(X)) {                \
 #pragma mark - 키 태그 가져오기
 
 +(NSString*)getKeyAllTagPub {
-    // KSLOG_DEBUG(@"%s return : %@", __FUNCTION__, keyTagPub);
     return keyTagPub;
 }
 
 +(NSString*)getKeyAllTagPri {
-    // KSLOG_DEBUG(@"%s return : %@", __FUNCTION__, keyTagPri);
     return keyTagPri;
 }
 
 +(void)setKeyTagPub:(NSString *)tag {
     keyTagPub = tag;
-    // KSLOG_DEBUG(@"%s after set : %@", __FUNCTION__, keyTagPub);
 }
 
 +(void)setKeyTagPri:(NSString *)tag {
     keyTagPri = tag;
-    // KSLOG_DEBUG(@"%s after set : %@", __FUNCTION__, keyTagPri);
 }
 
 +(NSString*)getKeyTagLastString {

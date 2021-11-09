@@ -14,16 +14,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - String
 
-+(NSString *) loadUdString:(NSString*)key;
-+(void) saveUdString:(NSString*)key value:(NSString*)value;
++(NSString *)loadUdString:(NSString*)key;
++(void)saveUdString:(NSString*)key value:(NSString*)value;
 
 #pragma mark - Int
-+(NSInteger) loadUdInt:(NSString*)key;
-+(void) saveUdInt:(NSString*)key value:(NSInteger)value;
+
++(NSInteger)loadUdInt:(NSString*)key;
++(void)saveUdInt:(NSString*)key value:(NSInteger)value;
 
 #pragma mark - Comm
 
-+(void) deleteUd:(NSString*)key;
++(void)deleteUd:(NSString*)key;
 
 @end
 

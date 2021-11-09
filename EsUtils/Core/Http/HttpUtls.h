@@ -27,7 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 +(NSString *)trim:(NSString *)strInput;
 +(NSMutableDictionary*)setDefaultDic:(BOOL)isJson;
-+(AFHTTPSessionManager*)setHeader:(NSDictionary*)dic sessionManager:(AFHTTPSessionManager *)sessionManager;
++(AFHTTPSessionManager*)setLibHeader:(NSDictionary*)dic sessionManager:(AFHTTPSessionManager *)sessionManager;
++(NSMutableURLRequest*)addOsHeader:(NSDictionary*)dic urlRequest:(NSMutableURLRequest*)urlRequest;
 
 #pragma mark - 값 변환 (JsonMgr & HttpUtils 중복으로 있음)
 

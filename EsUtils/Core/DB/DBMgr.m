@@ -22,7 +22,7 @@ const NSString *INT_VALUE = @"INT_VALUE";
     
     if (self = [super init]) {
         
-        if (IS_DEBUG_LOG) NSLog(@"start#");
+        NSLog(@"start#");
         
         NSString *docsDir;
         NSArray *dirPaths;
@@ -36,7 +36,7 @@ const NSString *INT_VALUE = @"INT_VALUE";
         
         [self makeDbFile];
         
-        if (IS_DEBUG_LOG) NSLog(@"end#");
+        NSLog(@"end#");
     }
     return self;
 }
@@ -61,14 +61,14 @@ const NSString *INT_VALUE = @"INT_VALUE";
 
 /// 파일 존재 여부 확인
 -(BOOL)existDbFile {
-    if (IS_DEBUG_LOG) NSLog(@"start");
+    NSLog(@"start");
     NSFileManager *filemgr = [NSFileManager defaultManager];
     if ([filemgr fileExistsAtPath: _databasePath ] == NO) {
         // 디비 파일 없음
-        if (IS_DEBUG_LOG) NSLog(@"return : NO");
+        NSLog(@"return : NO");
         return NO;
     } else {
-        if (IS_DEBUG_LOG) NSLog(@"return : YES");
+        NSLog(@"return : YES");
         return YES;
     }
 }
@@ -78,7 +78,7 @@ const NSString *INT_VALUE = @"INT_VALUE";
  * @return  디비와 테이블 생성 결과
  */
 -(BOOL) makeDbFile {
-    if (IS_DEBUG_LOG) NSLog(@"start#");
+    NSLog(@"start#");
     @try {
         
         if ([self open] == SQLITE_OK) {
@@ -96,8 +96,8 @@ const NSString *INT_VALUE = @"INT_VALUE";
             if (sqlite3_exec(_sql, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK) {
                 // 디비 테이블 생성 실패
                 NSLog(@"테이블 생성 실패");
-                if (IS_DEBUG_LOG) NSLog(@"return : NO");
-                if (IS_DEBUG_LOG) NSLog(@"errMsg : %s", errMsg);
+                NSLog(@"return : NO");
+                NSLog(@"errMsg : %s", errMsg);
                 [self close];
                 return NO;
             }
@@ -125,7 +125,7 @@ const NSString *INT_VALUE = @"INT_VALUE";
 /// @param key 키
 /// @param index 인덱스
 -(BOOL) insertString:(NSString *)value key:(NSString *)key index:(int)index {
-    if (IS_DEBUG_LOG) NSLog(@"[DEBUG] key : %@ / value : %@", key, value);
+    NSLog(@"[DEBUG] key : %@ / value : %@", key, value);
     
     sqlite3_stmt    *stmt;
     
@@ -135,7 +135,7 @@ const NSString *INT_VALUE = @"INT_VALUE";
         NSString *querySQL = [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@=%d", key, TABLE_NAME, INDEX, index];
         
         const char *query_stmt = [querySQL UTF8String];
-        if (IS_DEBUG_LOG) NSLog(@"[DEBUG] querySQL : %s", query_stmt);
+        NSLog(@"[DEBUG] querySQL : %s", query_stmt);
         
         if (sqlite3_prepare_v2(_sql, query_stmt, -1, &stmt, NULL) == SQLITE_OK) {
             
@@ -145,13 +145,13 @@ const NSString *INT_VALUE = @"INT_VALUE";
                 [self close];
                 BOOL result = [self updateString:value key:key index:index];
                 
-                if (IS_DEBUG_LOG) NSLog(@"[DEBUG] return %@ #", result ? @"Y" : @"N");
+                NSLog(@"[DEBUG] return %@ #", result ? @"Y" : @"N");
                 return result;
             } else {
                 // 가져온 값이 없으면 insert 진행
                 @try {
                     NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO %@ (%@, %@) VALUES (%d, '%@')", TABLE_NAME, INDEX, key, 0,  value];
-                    if (IS_DEBUG_LOG) NSLog(@"[DEBUG] insertSQL : %@", insertSQL);
+                    NSLog(@"[DEBUG] insertSQL : %@", insertSQL);
                     const char *insert_stmt = [insertSQL UTF8String];
                     
                     sqlite3_prepare_v2(_sql, insert_stmt, -1, &stmt, NULL);
@@ -188,7 +188,7 @@ const NSString *INT_VALUE = @"INT_VALUE";
 /// @param value 값
 /// @param key 키
 -(BOOL) insertString:(NSString *)value key:(NSString *)key {
-    if (IS_DEBUG_LOG) NSLog(@"[DEBUG]  key : %@ / value : %@", key, value);
+    NSLog(@"[DEBUG]  key : %@ / value : %@", key, value);
     
     sqlite3_stmt    *stmt;
     
@@ -196,7 +196,7 @@ const NSString *INT_VALUE = @"INT_VALUE";
         // 디비 파일 오픈 성공
         @try {
             NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO %@ (%@) VALUES ('%@')", TABLE_NAME, key, value];
-            if (IS_DEBUG_LOG) NSLog(@"[DEBUG]  insertSQL : %@", insertSQL);
+            NSLog(@"[DEBUG]  insertSQL : %@", insertSQL);
             const char *insert_stmt = [insertSQL UTF8String];
             
             sqlite3_prepare_v2(_sql, insert_stmt, -1, &stmt, NULL);
@@ -241,7 +241,7 @@ const NSString *INT_VALUE = @"INT_VALUE";
         NSString *querySQL = [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@=%d", key, TABLE_NAME, INDEX, index];
         
         const char *query_stmt = [querySQL UTF8String];
-        if (IS_DEBUG_LOG) NSLog(@"[DEBUG]  querySQL : %s", query_stmt);
+        NSLog(@"[DEBUG]  querySQL : %s", query_stmt);
         
         if (sqlite3_prepare_v2(_sql, query_stmt, -1, &stmt, NULL) == SQLITE_OK) {
             
@@ -251,13 +251,13 @@ const NSString *INT_VALUE = @"INT_VALUE";
                 [self close];
                 BOOL result = [self updateInt:value key:key index:index];
                 
-                if (IS_DEBUG_LOG) NSLog(@"[DEBUG]  return %@ #", result ? @"Y" : @"N");
+                NSLog(@"[DEBUG]  return %@ #", result ? @"Y" : @"N");
                 return result;
             } else {
                 // 가져온 값이 없으면 insert 진행
                 @try {
                     NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO %@ (%@, %@) VALUES (%d, %d)", TABLE_NAME, INDEX, key, 0,  value];
-                    if (IS_DEBUG_LOG) NSLog(@"[DEBUG]  insertSQL : %@", insertSQL);
+                    NSLog(@"[DEBUG]  insertSQL : %@", insertSQL);
                     const char *insert_stmt = [insertSQL UTF8String];
                     
                     sqlite3_prepare_v2(_sql, insert_stmt, -1, &stmt, NULL);
@@ -301,7 +301,7 @@ const NSString *INT_VALUE = @"INT_VALUE";
         
                 @try {
                     NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO %@ (%@) VALUES ( %d)", TABLE_NAME, key, value];
-                    if (IS_DEBUG_LOG) NSLog(@"[DEBUG]  insertSQL : %@", insertSQL);
+                    NSLog(@"[DEBUG]  insertSQL : %@", insertSQL);
                     const char *insert_stmt = [insertSQL UTF8String];
                     
                     sqlite3_prepare_v2(_sql, insert_stmt, -1, &stmt, NULL);
@@ -341,13 +341,13 @@ const NSString *INT_VALUE = @"INT_VALUE";
 /// @param index 인덱스
 -(BOOL)updateString:(NSString*)value key:(NSString*)key index:(int)index {
     
-    if (IS_DEBUG_LOG) NSLog(@"[DEBUG]  key : %@ / value : %@", key, value);
+    NSLog(@"[DEBUG]  key : %@ / value : %@", key, value);
     
     if([self open] == SQLITE_OK) {
         // 디비 오픈 성공
         NSString *querySQL = [NSString stringWithFormat:@"UPDATE %@ SET %@='%@' WHERE %@=%d", TABLE_NAME, key, value, INDEX, 0];
         const char *query_stmt = [querySQL UTF8String];
-        if (IS_DEBUG_LOG) NSLog(@"[DEBUG]  querySQL : %s", query_stmt);
+        NSLog(@"[DEBUG]  querySQL : %s", query_stmt);
         sqlite3_stmt *stmt;
         
         @try {
@@ -383,7 +383,7 @@ const NSString *INT_VALUE = @"INT_VALUE";
         // 디비 오픈 성공
         NSString *querySQL = [NSString stringWithFormat:@"UPDATE %@ SET %@=%d WHERE %@=%d", TABLE_NAME, key, value, INDEX, 0];
         const char *query_stmt = [querySQL UTF8String];
-        if (IS_DEBUG_LOG) NSLog(@"[DEBUG]  querySQL : %s", query_stmt);
+        NSLog(@"[DEBUG]  querySQL : %s", query_stmt);
         sqlite3_stmt *stmt;
         
         @try {
@@ -426,7 +426,7 @@ const NSString *INT_VALUE = @"INT_VALUE";
         NSString *querySQL = [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@=%d", key,TABLE_NAME, INDEX, index];
         
         const char *query_stmt = [querySQL UTF8String];
-        if (IS_DEBUG_LOG) NSLog(@"[DEBUG]  querySQL : %s", query_stmt);
+        NSLog(@"[DEBUG]  querySQL : %s", query_stmt);
         
         if (sqlite3_prepare_v2(_sql, query_stmt, -1, &stmt, NULL) == SQLITE_OK) {
             NSString *getValue = @"";
@@ -440,7 +440,7 @@ const NSString *INT_VALUE = @"INT_VALUE";
             sqlite3_finalize(stmt);
             [self close];
             if (getValue != nil) {
-                if (IS_DEBUG_LOG) NSLog(@"[DEBUG]  return : %@", getValue);
+                NSLog(@"[DEBUG]  return : %@", getValue);
                 return getValue;
             }
         }
@@ -461,7 +461,7 @@ const NSString *INT_VALUE = @"INT_VALUE";
         // 디비 파일 오픈 성공
         NSString *querySQL = [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@=%d", key,TABLE_NAME, INDEX, index];
         const char *query_stmt = [querySQL UTF8String];
-        if (IS_DEBUG_LOG) NSLog(@"[DEBUG]  querySQL : %s", query_stmt);
+        NSLog(@"[DEBUG]  querySQL : %s", query_stmt);
         
         if (sqlite3_prepare_v2(_sql, query_stmt, -1, &stmt, NULL) == SQLITE_OK) {
             
@@ -474,7 +474,7 @@ const NSString *INT_VALUE = @"INT_VALUE";
             }
             sqlite3_finalize(stmt);
             [self close];
-            if (IS_DEBUG_LOG) NSLog(@"[DEBUG]  getValue : %d", value);
+            NSLog(@"[DEBUG]  getValue : %d", value);
             return value;
         }
         [self close];
@@ -495,8 +495,8 @@ const NSString *INT_VALUE = @"INT_VALUE";
     
     // string nil
     if (strVal == nil) {
-        if (IS_DEBUG_LOG) NSLog(@"파라미터값은 nil이거나 공백이 아니어야 합니다");
-        if (IS_DEBUG_LOG) NSLog(@"return N#");
+        NSLog(@"파라미터값은 nil이거나 공백이 아니어야 합니다");
+        NSLog(@"return N#");
         return NO;
     }
     
@@ -522,27 +522,27 @@ const NSString *INT_VALUE = @"INT_VALUE";
                 sqlite3_finalize(stmt);
                 [self close];
                 
-                if (IS_DEBUG_LOG) NSLog(@"return : Y#");
+                NSLog(@"return : Y#");
                 return YES;
             } else {
                 // insert 실패
                 sqlite3_finalize(stmt);
                 [self close];
-                if (IS_DEBUG_LOG) NSLog(@"return : N#");
+                NSLog(@"return : N#");
                 return NO;
             }
         } @catch (NSException *e) {
-            if (IS_DEBUG_LOG) NSLog(@"return : N #");
+            NSLog(@"return : N #");
             return NO;
         }
         
     } else {
         // 디비 오픈 실패
-        if (IS_DEBUG_LOG) NSLog(@"return : N#");
+        NSLog(@"return : N#");
         return NO;
     }
     
-    if (IS_DEBUG_LOG) NSLog(@"end#");
+    NSLog(@"end#");
     return YES;
 }
 
@@ -559,8 +559,8 @@ const NSString *INT_VALUE = @"INT_VALUE";
 -(BOOL) update:(NSString*)strVal intVal:(int)intVal index:(int)index {
     
     if (strVal == nil) {
-        if (IS_DEBUG_LOG) NSLog(@"uid 값은 nil이거나 공백이 아니어야 합니다");
-        if (IS_DEBUG_LOG) NSLog(@"return N#");
+        NSLog(@"uid 값은 nil이거나 공백이 아니어야 합니다");
+        NSLog(@"return N#");
         return NO;
     }
     
@@ -568,7 +568,7 @@ const NSString *INT_VALUE = @"INT_VALUE";
     if (![self existDbFile]) {
         return NO;
     }
-    if (IS_DEBUG_LOG) NSLog(@"디비에 가져온 Method, Uid == 파라미터로 받은 Method, Uid");
+    NSLog(@"디비에 가져온 Method, Uid == 파라미터로 받은 Method, Uid");
     if([self open] == SQLITE_OK) {
         // 디비 오픈 성공
         NSString *querySQL = [NSString stringWithFormat:@"UPDATE %@ SET %@=\"%@\", %@=%d WHERE %@=%d", TABLE_NAME, STRING_VALUE, strVal, INT_VALUE, intVal, INDEX, index];
@@ -584,7 +584,7 @@ const NSString *INT_VALUE = @"INT_VALUE";
                     [self close];
                     
                     // 업데이트 실패
-                    if (IS_DEBUG_LOG) NSLog(@"return : N#");
+                    NSLog(@"return : N#");
                     return NO;
                 }
                 sqlite3_finalize(stmt);
@@ -592,16 +592,16 @@ const NSString *INT_VALUE = @"INT_VALUE";
             [self close];
             
         } @catch(NSException *e) {
-            if (IS_DEBUG_LOG) NSLog(@"return : N #");
+            NSLog(@"return : N #");
             return NO;
         }
     } else {
         // 디비 오픈 실패
-        if (IS_DEBUG_LOG) NSLog(@"return : N#");
+        NSLog(@"return : N#");
         return NO;
     }
     
-    if (IS_DEBUG_LOG) NSLog(@"return : Y#");
+    NSLog(@"return : Y#");
     return YES;
 }
 
@@ -616,7 +616,7 @@ const NSString *INT_VALUE = @"INT_VALUE";
  * @return  가져온 데이터 dictionary
  */
 -(NSMutableDictionary *) load:(int)index {
-    if (IS_DEBUG_LOG) NSLog(@"start#");
+    NSLog(@"start#");
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     
@@ -644,7 +644,7 @@ const NSString *INT_VALUE = @"INT_VALUE";
                     dic[INT_VALUE] = [NSString stringWithFormat:@"%d", intVal];
                     
                 } @catch (NSException *e) {
-                    if (IS_DEBUG_LOG) NSLog(@"return nil#");
+                    NSLog(@"return nil#");
                     return nil;
                 }
             }
@@ -657,12 +657,12 @@ const NSString *INT_VALUE = @"INT_VALUE";
     }
     
     if (dic.count == 0 || dic == nil) {
-        if (IS_DEBUG_LOG) NSLog(@"return nil#");
+        NSLog(@"return nil#");
         return nil;
     }
     
-    if (IS_DEBUG_LOG) NSLog(@"return : %@#", dic);
-    if (IS_DEBUG_LOG) NSLog(@"end#");
+    NSLog(@"return : %@#", dic);
+    NSLog(@"end#");
     return dic;
 }
 
@@ -671,7 +671,7 @@ const NSString *INT_VALUE = @"INT_VALUE";
 #pragma mark - Etc
 
 -(void) printAllDbData {
-    if (IS_DEBUG_LOG) NSLog(@"start#");
+    NSLog(@"start#");
     sqlite3_stmt    *stmt;
     
     // 200121 디비 파일 체크 함수 따로 뺌
@@ -685,18 +685,18 @@ const NSString *INT_VALUE = @"INT_VALUE";
         
         const char *query_stmt = [querySQL UTF8String];
         if (sqlite3_prepare_v2(_sql, query_stmt, -1, &stmt, NULL) == SQLITE_OK) {
-            if (IS_DEBUG_LOG) NSLog(@"========== query 조회 시작");
+            NSLog(@"========== query 조회 시작");
             while (sqlite3_step(stmt) == SQLITE_ROW) {
                 @try {
                     int index = sqlite3_column_int(stmt, 0);
                     const char *strVal = sqlite3_column_text(stmt, 1);
                     int intVal = sqlite3_column_int(stmt, 2);
-                    if (IS_DEBUG_LOG) NSLog(@"\nindex : %d / strVal : %s / intVal : %d", index, strVal, intVal);
+                    NSLog(@"\nindex : %d / strVal : %s / intVal : %d", index, strVal, intVal);
                 } @catch (NSException *e) {
-                    if (IS_DEBUG_LOG) NSLog(@"return : nil#");
+                    NSLog(@"return : nil#");
                 }
             }
-            if (IS_DEBUG_LOG) NSLog(@"========== query 조회 끝");
+            NSLog(@"========== query 조회 끝");
             sqlite3_finalize(stmt);
         }
         [self close];
@@ -704,7 +704,7 @@ const NSString *INT_VALUE = @"INT_VALUE";
         // 디비 오픈 실패
     }
     
-    if (IS_DEBUG_LOG) NSLog(@"end#");
+    NSLog(@"end#");
 }
 
 

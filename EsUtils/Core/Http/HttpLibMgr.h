@@ -12,12 +12,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HttpLibMgr : NSObject
 
++(void)postJSONString:(NSString *)url param:(NSString *)param header:(nullable NSDictionary*)header timeout:(int)timeout
+              success:(void (^)(id responseObject))success
+              failure:(void (^)(NSError *error))failure;
 
-+(void)get:(NSString *)url header:(nullable NSDictionary*)header success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure;
++(void)postJSONDic:(NSString *)url param:(NSDictionary *)param header:(nullable NSDictionary*)header timeout:(int)timeout
+           success:(void (^)(id responseObject))success
+           failure:(void (^)(NSError *error))failure;
 
-
-+(void)post:(NSString *)url parameters:(NSString *)parameters isJson:(BOOL)isJson header:(nullable NSDictionary*)header
++(void)postQueryString:(NSString *)url param:(NSString *)param header:(nullable NSDictionary*)header timeout:(int)timeout
                success:(void (^)(id responseObject))success
+               failure:(void (^)(NSError *error))failure;
+
++(void)postQueryDic:(NSString *)url param:(NSDictionary *)param header:(nullable NSDictionary*)header timeout:(int)timeout
+            success:(void (^)(id responseObject))success
             failure:(void (^)(NSError *error))failure;
 
 @end

@@ -19,10 +19,10 @@
 /// SHA256 해시
 /// @param input 해시할 값
 +(NSString*)sha256:(NSString*)input {
-    if (IS_DEBUG_LOG) NSLog(@"start#");
+    NSLog(@"start#");
     @try {
         if (input == nil || [input isEqualToString:@""]) {
-            if (IS_DEBUG_LOG) NSLog(@"return : nil");
+            NSLog(@"return : nil");
             return nil;
         }
         
@@ -44,11 +44,11 @@
         
         if (sbuf == nil || [sbuf isEqualToString:@""]) {
             // 해시 실패
-            if (IS_DEBUG_LOG) NSLog(@"return : nil#");
+            NSLog(@"return : nil#");
             return nil;
         }
         
-        if (IS_DEBUG_LOG) NSLog(@"end#");
+        NSLog(@"end#");
         return sbuf;
         
     } @catch (NSException *exception) {
@@ -61,10 +61,10 @@
 /// SHA256 해시
 /// @param input 해시할 값
 +(NSData*)sha256ToFromByte:(NSData*)input {
-    if (IS_DEBUG_LOG) NSLog(@"start#");
+    NSLog(@"start#");
     
     if (input == nil) {
-        if (IS_DEBUG_LOG) NSLog(@"return : nil");
+        NSLog(@"return : nil");
         return nil;
     }
     
@@ -72,8 +72,8 @@
     NSString *strInData = [self decodeUTF8:input];
     
     if (strInData == nil || [strInData isEqualToString:@""]) {
-        if (IS_DEBUG_LOG) NSLog(@"str 값은 nil 이거나 공백이 아니어야 합니다");
-        if (IS_DEBUG_LOG) NSLog(@"return : nil#");
+        NSLog(@"str 값은 nil 이거나 공백이 아니어야 합니다");
+        NSLog(@"return : nil#");
         return nil;
     }
     
@@ -84,11 +84,11 @@
     data = [self encodeUTF8:result];
     
     if (data == nil) {
-        if (IS_DEBUG_LOG) NSLog(@"return : nil");
+        NSLog(@"return : nil");
         return nil;
     }
     
-    if (IS_DEBUG_LOG) NSLog(@"end");
+    NSLog(@"end");
     return data;
 }
 
@@ -96,11 +96,11 @@
 /// SHA256 해시
 /// @param input 해시할 값
 +(NSData*)sha256ToByte:(NSString*)input {
-    if (IS_DEBUG_LOG) NSLog(@"start#");
+    NSLog(@"start#");
     
     if (input == nil || [input isEqualToString:@""]) {
         // parameter null check
-        if (IS_DEBUG_LOG) NSLog(@"return : nil");
+        NSLog(@"return : nil");
         return nil;
     }
     
@@ -111,21 +111,21 @@
     data = [self encodeUTF8:result];
     
     if (data == nil) {
-        if (IS_DEBUG_LOG) NSLog(@"return : nil");
+        NSLog(@"return : nil");
         return nil;
     }
     
-    if (IS_DEBUG_LOG) NSLog(@"end");
+    NSLog(@"end");
     return data;
 }
 
 #pragma mark - HMAC SHA256
 
 +(NSString*)hmacSha256:(NSString*)key data:(NSString*)data {
-    if (IS_DEBUG_LOG) NSLog(@"start. key : %@ / data : %@", key, data);
+    NSLog(@"start. key : %@ / data : %@", key, data);
     
     if (key == nil || data == nil) {
-        if (IS_DEBUG_LOG) NSLog(@"key 또는 data nil");
+        NSLog(@"key 또는 data nil");
         return nil;
     }
     
@@ -141,13 +141,13 @@
         
         NSString *base64String = [hash base64EncodedStringWithOptions:0];
         
-        if (IS_DEBUG_LOG) NSLog(@"data : %@", s);
+        NSLog(@"data : %@", s);
         
-        if (IS_DEBUG_LOG) NSLog(@"base64String : %@", base64String);
+        NSLog(@"base64String : %@", base64String);
         
         return s;
     } @catch (NSException *exception) {
-        if (IS_DEBUG_LOG) NSLog(@"exception : %@", exception.description);
+        NSLog(@"exception : %@", exception.description);
         return nil;
     }
     
@@ -161,7 +161,7 @@
 // NSData -> NSData
 +(NSData *)encodeB64ToData:(NSData*)input {
     NSData *result = [input base64EncodedDataWithOptions:0];
-    if (IS_DEBUG_LOG) NSLog(@"return : %@", result);
+    NSLog(@"return : %@", result);
     return result;
 }
 
@@ -169,7 +169,7 @@
 +(NSString *)encodeB64ToString:(NSData *)input {
 //    NSData *result = [[NSData alloc] initWithBase64EncodedString:input options:0];
     NSString *result = [input base64EncodedStringWithOptions:0];
-    if (IS_DEBUG_LOG) NSLog(@"return : %@", result);
+    NSLog(@"return : %@", result);
     return result;
 }
 
@@ -180,7 +180,7 @@
     if (dataResult == nil) {
         // base64 디코딩 실패
         // 오류코드&메시지 추가
-        if (IS_DEBUG_LOG) NSLog(@"return : nil#");
+        NSLog(@"return : nil#");
         return nil;
     }
     return dataResult;
@@ -198,7 +198,7 @@
     if (strResult == nil || [strResult isEqualToString:@""]) {
         // base64 디코딩 실패
         // 오류코드&메시지 추가
-        if (IS_DEBUG_LOG) NSLog(@"return : nil#");
+        NSLog(@"return : nil#");
         return nil;
     }
     return strResult;
@@ -251,7 +251,7 @@
 +(NSData*)encodeUTF8:(NSString*)input {
     NSData *dataResult = [input dataUsingEncoding:NSUTF8StringEncoding];
     if (dataResult == nil) {
-        if (IS_DEBUG_LOG) NSLog(@"return : nil#");
+        NSLog(@"return : nil#");
         return nil;
     }
     return dataResult;
@@ -263,7 +263,7 @@
     if (strResult == nil || [strResult isEqualToString:@""]) {
         // base64 디코딩 실패
         // 오류코드&메시지 추가
-        if (IS_DEBUG_LOG) NSLog(@"return : nil#");
+        NSLog(@"return : nil#");
         return nil;
     }
     
@@ -295,11 +295,11 @@
     } else {
         // 생성 실패
         
-        if (IS_DEBUG_LOG) NSLog(@"return : nil#");
+        NSLog(@"return : nil#");
         return nil;
     }
     
-    if (IS_DEBUG_LOG) NSLog(@"return : %@#", hex);
+    NSLog(@"return : %@#", hex);
     return hex;
 }
 @end

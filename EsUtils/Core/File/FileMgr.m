@@ -11,12 +11,9 @@
 #define DEFAULT_FILE_NAME @"defaultFile.txt"    // 파일 이름을 지정하지 않았을 때 자동으로 사용함
 #define DEFAULT_FILE_KEY @"defaultKey"      // 파일 키를 지정하지 않았을 때 자동으로 사용함
 
-@implementation FileMgr
-{
+@implementation FileMgr {
     NSString *filePath;
 }
-
-
 
 /// 파일명과 함께 초기화
 /// @param name 파일 이름
@@ -24,7 +21,6 @@
     filePath = [self setFilePath:name];
     return self;
 }
-
 
 /// 파일 패스를 설정 으로 설정
 -(NSString*)setFilePath:(NSString*)fileName {

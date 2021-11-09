@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface EncMgr : NSObject
 
+// TODO: 내용 추가
 
 
 @end

@@ -17,3 +17,17 @@ FOUNDATION_EXPORT const unsigned char EsUtilsVersionString[];
 // In this header, you should import all the public headers of your framework using statements like #import <EsUtils/PublicHeader.h>
 
 
+#import <EsUtils/DesignMgr.h>
+#import <EsUtils/DefaultAlert.h>
+#import <EsUtils/DeviceMgr.h>
+#import <EsUtils/Utils.h>
+#import <EsUtils/ConvertMgr.h>
+#import <EsUtils/AuthMgr.h>
+#import <EsUtils/FileMgr.h>
+#import <EsUtils/UserDefaultsMgr.h>
+#import <EsUtils/EncMgr.h>
+#import <EsUtils/EncUtil.h>
+#import <EsUtils/JsonMgr.h>
+#import <EsUtils/HttpMgr.h>
+#import <EsUtils/DBMgr.h>
+#import <EsUtils/ErrorMgr.h>

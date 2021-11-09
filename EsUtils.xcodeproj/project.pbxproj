@@ -7,30 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D7B748A273A36270012A105 /* ErrorMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D7B7488273A36270012A105 /* ErrorMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2D7B748B273A36270012A105 /* ErrorMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7B7489273A36270012A105 /* ErrorMgr.m */; };
 		FA088AFF2459E53200F7808D /* FileMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = FA088AEE2459E53200F7808D /* FileMgr.m */; };
-		FA088B002459E53200F7808D /* FileMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = FA088AEF2459E53200F7808D /* FileMgr.h */; };
+		FA088B002459E53200F7808D /* FileMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = FA088AEF2459E53200F7808D /* FileMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA088B012459E53200F7808D /* UserDefaultsMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = FA088AF12459E53200F7808D /* UserDefaultsMgr.m */; };
-		FA088B022459E53200F7808D /* UserDefaultsMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = FA088AF22459E53200F7808D /* UserDefaultsMgr.h */; };
+		FA088B022459E53200F7808D /* UserDefaultsMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = FA088AF22459E53200F7808D /* UserDefaultsMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA088B032459E53200F7808D /* EncMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = FA088AF42459E53200F7808D /* EncMgr.m */; };
-		FA088B042459E53200F7808D /* EncMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = FA088AF52459E53200F7808D /* EncMgr.h */; };
-		FA088B052459E53200F7808D /* JsonMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = FA088AF72459E53200F7808D /* JsonMgr.h */; };
+		FA088B042459E53200F7808D /* EncMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = FA088AF52459E53200F7808D /* EncMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FA088B052459E53200F7808D /* JsonMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = FA088AF72459E53200F7808D /* JsonMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA088B062459E53200F7808D /* JsonMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = FA088AF82459E53200F7808D /* JsonMgr.m */; };
-		FA088B072459E53200F7808D /* HttpCommMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = FA088AFA2459E53200F7808D /* HttpCommMgr.m */; };
-		FA088B082459E53200F7808D /* HttpCommMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = FA088AFB2459E53200F7808D /* HttpCommMgr.h */; };
+		FA088B072459E53200F7808D /* HttpMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = FA088AFA2459E53200F7808D /* HttpMgr.m */; };
+		FA088B082459E53200F7808D /* HttpMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = FA088AFB2459E53200F7808D /* HttpMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA088B092459E53200F7808D /* DBMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = FA088AFD2459E53200F7808D /* DBMgr.m */; };
-		FA088B0A2459E53200F7808D /* DBMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = FA088AFE2459E53200F7808D /* DBMgr.h */; };
-		FA088B0C2459E56D00F7808D /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = FA088B0B2459E56D00F7808D /* Constants.h */; };
-		FA82661E2737B9A300993E4B /* DesignMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = FA82661C2737B9A300993E4B /* DesignMgr.h */; };
+		FA088B0A2459E53200F7808D /* DBMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = FA088AFE2459E53200F7808D /* DBMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FA088B0C2459E56D00F7808D /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = FA088B0B2459E56D00F7808D /* Constants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FA82661E2737B9A300993E4B /* DesignMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = FA82661C2737B9A300993E4B /* DesignMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA82661F2737B9A300993E4B /* DesignMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = FA82661D2737B9A300993E4B /* DesignMgr.m */; };
-		FA8266232737BB0900993E4B /* DefaultAlert.h in Headers */ = {isa = PBXBuildFile; fileRef = FA8266212737BB0900993E4B /* DefaultAlert.h */; };
+		FA8266232737BB0900993E4B /* DefaultAlert.h in Headers */ = {isa = PBXBuildFile; fileRef = FA8266212737BB0900993E4B /* DefaultAlert.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA8266242737BB0900993E4B /* DefaultAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8266222737BB0900993E4B /* DefaultAlert.m */; };
-		FA8266272737BB5600993E4B /* DeviceMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = FA8266252737BB5600993E4B /* DeviceMgr.h */; };
+		FA8266272737BB5600993E4B /* DeviceMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = FA8266252737BB5600993E4B /* DeviceMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA8266282737BB5600993E4B /* DeviceMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8266262737BB5600993E4B /* DeviceMgr.m */; };
-		FA82662B2737BBD100993E4B /* ConvertMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = FA8266292737BBD100993E4B /* ConvertMgr.h */; };
+		FA82662B2737BBD100993E4B /* ConvertMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = FA8266292737BBD100993E4B /* ConvertMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA82662C2737BBD100993E4B /* ConvertMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = FA82662A2737BBD100993E4B /* ConvertMgr.m */; };
-		FA82662F2737BC0B00993E4B /* AuthMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = FA82662D2737BC0B00993E4B /* AuthMgr.h */; };
+		FA82662F2737BC0B00993E4B /* AuthMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = FA82662D2737BC0B00993E4B /* AuthMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA8266302737BC0B00993E4B /* AuthMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = FA82662E2737BC0B00993E4B /* AuthMgr.m */; };
-		FA8266372737BCF000993E4B /* EncUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = FA8266312737BCF000993E4B /* EncUtil.h */; };
+		FA8266372737BCF000993E4B /* EncUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = FA8266312737BCF000993E4B /* EncUtil.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA8266382737BCF000993E4B /* EncUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8266322737BCF000993E4B /* EncUtil.m */; };
 		FA8266392737BCF000993E4B /* EncAES.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8266332737BCF000993E4B /* EncAES.m */; };
 		FA82663A2737BCF000993E4B /* EncRSA.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8266342737BCF000993E4B /* EncRSA.m */; };
@@ -64,6 +66,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D7B7488273A36270012A105 /* ErrorMgr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ErrorMgr.h; sourceTree = "<group>"; };
+		2D7B7489273A36270012A105 /* ErrorMgr.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ErrorMgr.m; sourceTree = "<group>"; };
 		FA088AEE2459E53200F7808D /* FileMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileMgr.m; sourceTree = "<group>"; };
 		FA088AEF2459E53200F7808D /* FileMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileMgr.h; sourceTree = "<group>"; };
 		FA088AF12459E53200F7808D /* UserDefaultsMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaultsMgr.m; sourceTree = "<group>"; };
@@ -72,8 +76,8 @@
 		FA088AF52459E53200F7808D /* EncMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncMgr.h; sourceTree = "<group>"; };
 		FA088AF72459E53200F7808D /* JsonMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonMgr.h; sourceTree = "<group>"; };
 		FA088AF82459E53200F7808D /* JsonMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JsonMgr.m; sourceTree = "<group>"; };
-		FA088AFA2459E53200F7808D /* HttpCommMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpCommMgr.m; sourceTree = "<group>"; };
-		FA088AFB2459E53200F7808D /* HttpCommMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpCommMgr.h; sourceTree = "<group>"; };
+		FA088AFA2459E53200F7808D /* HttpMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpMgr.m; sourceTree = "<group>"; };
+		FA088AFB2459E53200F7808D /* HttpMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpMgr.h; sourceTree = "<group>"; };
 		FA088AFD2459E53200F7808D /* DBMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMgr.m; sourceTree = "<group>"; };
 		FA088AFE2459E53200F7808D /* DBMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMgr.h; sourceTree = "<group>"; };
 		FA088B0B2459E56D00F7808D /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -134,9 +138,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D7B7487273A35000012A105 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				FA82662D2737BC0B00993E4B /* AuthMgr.h */,
+				FA82662E2737BC0B00993E4B /* AuthMgr.m */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		2D7B748C273A37840012A105 /* Date */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Date;
+			sourceTree = "<group>";
+		};
 		FA088AEC2459E53200F7808D /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				2D7B748C273A37840012A105 /* Date */,
+				FA8B21A723EFE0B2008182EC /* Utils.h */,
+				FA8B21A823EFE0B2008182EC /* Utils.m */,
+				FA8266292737BBD100993E4B /* ConvertMgr.h */,
+				FA82662A2737BBD100993E4B /* ConvertMgr.m */,
+				2D7B7487273A35000012A105 /* Auth */,
 				FA088AED2459E53200F7808D /* File */,
 				FA088AF02459E53200F7808D /* UD */,
 				FA088AF32459E53200F7808D /* Enc */,
@@ -159,8 +185,8 @@
 		FA088AF02459E53200F7808D /* UD */ = {
 			isa = PBXGroup;
 			children = (
-				FA088AF12459E53200F7808D /* UserDefaultsMgr.m */,
 				FA088AF22459E53200F7808D /* UserDefaultsMgr.h */,
+				FA088AF12459E53200F7808D /* UserDefaultsMgr.m */,
 			);
 			path = UD;
 			sourceTree = "<group>";
@@ -168,14 +194,14 @@
 		FA088AF32459E53200F7808D /* Enc */ = {
 			isa = PBXGroup;
 			children = (
+				FA088AF52459E53200F7808D /* EncMgr.h */,
+				FA088AF42459E53200F7808D /* EncMgr.m */,
 				FA8266352737BCF000993E4B /* EncAES.h */,
 				FA8266332737BCF000993E4B /* EncAES.m */,
 				FA8266362737BCF000993E4B /* EncRSA.h */,
 				FA8266342737BCF000993E4B /* EncRSA.m */,
 				FA8266312737BCF000993E4B /* EncUtil.h */,
 				FA8266322737BCF000993E4B /* EncUtil.m */,
-				FA088AF52459E53200F7808D /* EncMgr.h */,
-				FA088AF42459E53200F7808D /* EncMgr.m */,
 			);
 			path = Enc;
 			sourceTree = "<group>";
@@ -192,8 +218,8 @@
 		FA088AF92459E53200F7808D /* Http */ = {
 			isa = PBXGroup;
 			children = (
-				FA088AFB2459E53200F7808D /* HttpCommMgr.h */,
-				FA088AFA2459E53200F7808D /* HttpCommMgr.m */,
+				FA088AFB2459E53200F7808D /* HttpMgr.h */,
+				FA088AFA2459E53200F7808D /* HttpMgr.m */,
 				FA8266602737C59000993E4B /* HttpOsMgr.h */,
 				FA8266612737C59000993E4B /* HttpOsMgr.m */,
 				FA8266642737C59900993E4B /* HttpLibMgr.h */,
@@ -207,8 +233,8 @@
 		FA088AFC2459E53200F7808D /* DB */ = {
 			isa = PBXGroup;
 			children = (
-				FA088AFD2459E53200F7808D /* DBMgr.m */,
 				FA088AFE2459E53200F7808D /* DBMgr.h */,
+				FA088AFD2459E53200F7808D /* DBMgr.m */,
 			);
 			path = DB;
 			sourceTree = "<group>";
@@ -284,19 +310,15 @@
 		FA8B219E23EFE001008182EC /* EsUtils */ = {
 			isa = PBXGroup;
 			children = (
+				FA8B219F23EFE001008182EC /* EsUtils.h */,
 				FA82663D2737C1A100993E4B /* Lib */,
 				FA82661B2737B99500993E4B /* UI */,
-				FA088B0B2459E56D00F7808D /* Constants.h */,
 				FA088AEC2459E53200F7808D /* Core */,
-				FA8B21A723EFE0B2008182EC /* Utils.h */,
-				FA8B21A823EFE0B2008182EC /* Utils.m */,
-				FA8B219F23EFE001008182EC /* EsUtils.h */,
 				FA8B21A023EFE001008182EC /* Info.plist */,
 				FA8266202737BA6A00993E4B /* EsUtils-Prefix.pch */,
-				FA8266292737BBD100993E4B /* ConvertMgr.h */,
-				FA82662A2737BBD100993E4B /* ConvertMgr.m */,
-				FA82662D2737BC0B00993E4B /* AuthMgr.h */,
-				FA82662E2737BC0B00993E4B /* AuthMgr.m */,
+				FA088B0B2459E56D00F7808D /* Constants.h */,
+				2D7B7488273A36270012A105 /* ErrorMgr.h */,
+				2D7B7489273A36270012A105 /* ErrorMgr.m */,
 			);
 			path = EsUtils;
 			sourceTree = "<group>";
@@ -309,33 +331,34 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA8266542737C1A100993E4B /* AFURLSessionManager.h in Headers */,
+				FA82662B2737BBD100993E4B /* ConvertMgr.h in Headers */,
+				FA8266232737BB0900993E4B /* DefaultAlert.h in Headers */,
+				FA088B002459E53200F7808D /* FileMgr.h in Headers */,
+				FA8266372737BCF000993E4B /* EncUtil.h in Headers */,
+				FA82662F2737BC0B00993E4B /* AuthMgr.h in Headers */,
+				FA088B0A2459E53200F7808D /* DBMgr.h in Headers */,
+				2D7B748A273A36270012A105 /* ErrorMgr.h in Headers */,
+				FA8266272737BB5600993E4B /* DeviceMgr.h in Headers */,
+				FA82661E2737B9A300993E4B /* DesignMgr.h in Headers */,
+				FA088B052459E53200F7808D /* JsonMgr.h in Headers */,
+				FA088B022459E53200F7808D /* UserDefaultsMgr.h in Headers */,
+				FA088B082459E53200F7808D /* HttpMgr.h in Headers */,
+				FA088B042459E53200F7808D /* EncMgr.h in Headers */,
 				FA8266532737C1A100993E4B /* AFNetworkReachabilityManager.h in Headers */,
 				FA088B0C2459E56D00F7808D /* Constants.h in Headers */,
 				FA8266622737C59000993E4B /* HttpOsMgr.h in Headers */,
-				FA82662B2737BBD100993E4B /* ConvertMgr.h in Headers */,
-				FA8266232737BB0900993E4B /* DefaultAlert.h in Headers */,
-				FA8266372737BCF000993E4B /* EncUtil.h in Headers */,
 				FA82663C2737BCF000993E4B /* EncRSA.h in Headers */,
-				FA088B002459E53200F7808D /* FileMgr.h in Headers */,
-				FA088B0A2459E53200F7808D /* DBMgr.h in Headers */,
 				FA8266582737C1A100993E4B /* AFURLResponseSerialization.h in Headers */,
 				FA82666A2737C64200993E4B /* HttpUtls.h in Headers */,
-				FA82662F2737BC0B00993E4B /* AuthMgr.h in Headers */,
 				FA82665E2737C1A100993E4B /* AFCompatibilityMacros.h in Headers */,
-				FA088B042459E53200F7808D /* EncMgr.h in Headers */,
 				FA82663B2737BCF000993E4B /* EncAES.h in Headers */,
 				FA8266662737C59900993E4B /* HttpLibMgr.h in Headers */,
-				FA8266272737BB5600993E4B /* DeviceMgr.h in Headers */,
 				FA8266522737C1A100993E4B /* AFSecurityPolicy.h in Headers */,
 				FA82665F2737C1A100993E4B /* AFHTTPSessionManager.h in Headers */,
-				FA82661E2737B9A300993E4B /* DesignMgr.h in Headers */,
 				FA8266552737C1A100993E4B /* AFURLRequestSerialization.h in Headers */,
 				FA8266512737C1A100993E4B /* Reachability.h in Headers */,
 				FA82665B2737C1A100993E4B /* AFNetworking.h in Headers */,
-				FA088B052459E53200F7808D /* JsonMgr.h in Headers */,
 				FA8B21A923EFE0B2008182EC /* Utils.h in Headers */,
-				FA088B022459E53200F7808D /* UserDefaultsMgr.h in Headers */,
-				FA088B082459E53200F7808D /* HttpCommMgr.h in Headers */,
 				FA8B21A123EFE001008182EC /* EsUtils.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,10 +440,11 @@
 				FA8266592737C1A100993E4B /* AFURLSessionManager.m in Sources */,
 				FA8266242737BB0900993E4B /* DefaultAlert.m in Sources */,
 				FA8266382737BCF000993E4B /* EncUtil.m in Sources */,
-				FA088B072459E53200F7808D /* HttpCommMgr.m in Sources */,
+				FA088B072459E53200F7808D /* HttpMgr.m in Sources */,
 				FA82662C2737BBD100993E4B /* ConvertMgr.m in Sources */,
 				FA8266632737C59000993E4B /* HttpOsMgr.m in Sources */,
 				FA8266392737BCF000993E4B /* EncAES.m in Sources */,
+				2D7B748B273A36270012A105 /* ErrorMgr.m in Sources */,
 				FA82665A2737C1A100993E4B /* AFURLRequestSerialization.m in Sources */,
 				FA8266562737C1A100993E4B /* AFURLResponseSerialization.m in Sources */,
 				FA088B062459E53200F7808D /* JsonMgr.m in Sources */,
@@ -567,7 +591,7 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/EsUtils-Prefix.pch";
 				INFOPLIST_FILE = EsUtils/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -593,7 +617,7 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/EsUtils-Prefix.pch";
 				INFOPLIST_FILE = EsUtils/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

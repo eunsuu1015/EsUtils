@@ -23,7 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Flag Value
 
 static BOOL IS_DEBUG_LOG = YES; // 로그 출력 여부 / 빌드 시 NO
-static BOOL IS_TMP_FLAG = NO;
 
 #pragma mark - 상수
 
