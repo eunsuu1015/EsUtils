@@ -12,60 +12,66 @@
 @implementation JsonMgr
 
 #pragma mark - 값 조회
+#pragma mark JSON String 에서 값 조회
 
 /// JSON String 에서 String 값 가져오기
 /// @param jsonString JSON String
 /// @param key 값 조회할 키
 +(NSString*)getStringFromJson:(nonnull NSString*)jsonString withKey:(nonnull NSString*)key {
-    NSLog(@"start. jsonString : %@ / key : %@", jsonString, key);
-    NSString *result = nil;
+    NSMutableDictionary *json = [self jsonToDic:jsonString];
+    return [json objectForKey:key];
+}
+
+/// JSON String 에서 int 가져오기
+/// @param jsonString JSON String
+/// @param key 값 조회할 키
++(int)getIntFromJson:(nonnull NSString*)jsonString withKey:(nonnull NSString*)key {
+    int result = 0;
     @try {
-        NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-        NSError *error = nil;
-        // NSData -> NSDictionary (JSON Object)
-        NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
-        if (error) {
-            NSLog(@"error : %@", error.description);
-        } else{
-            result = [json objectForKey:key];
+        NSMutableDictionary *json = [self jsonToDic:jsonString];
+        NSString *strResult = [json objectForKey:key];
+        if (strResult == nil) {
+            NSLog(@"값 가져오기 실패");
+        } else {
+            result = [strResult intValue];
         }
+        return result;
     } @catch (NSException *exception) {
         NSLog(@"exception : %@", exception.description);
-        result = nil;
+        return 0;
     }
-    NSLog(@"end. return : %@", result);
-    return result;
 }
 
 /// JSON String 에서 리스트 가져오기
 /// @param jsonString JSON String
 /// @param key 값 조회할 키
 +(NSMutableArray*)getArrayFromJson:(nonnull NSString*)jsonString withKey:(nonnull NSString*)key {
-    NSLog(@"start. jsonString : %@ / withKey : %@", jsonString, key);
-    NSMutableArray *result = nil;
-    @try {
-        NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-        NSError *error = nil;
-        // NSData -> NSDictionary (JSON Object)
-        NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
-        if (error) {
-            NSLog(@"error : %@", error.description);
-        } else {
-            result = [json objectForKey:key];
-        }
-    } @catch (NSException *exception) {
-        NSLog(@"exception : %@", exception.description);
-        result = nil;
-    }
-    NSLog(@"end");
-    return result;
+    NSMutableDictionary *json = [self jsonToDic:jsonString];
+    return [json objectForKey:key];
 }
+
+/// Json String 에서 Dictionary 추출
+/// @param jsonString JSON String
+/// @param key 추출할 Dictionary key
++(NSMutableDictionary*)getDicFromJson:(NSString*)jsonString withKey:(NSString*)key {
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error = nil;
+    NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
+    
+    if (error) {
+        NSLog(@"[ERROR] error : %@", error.description);
+        return nil;
+    }
+    return [json objectForKey:key];
+}
+
+
+#pragma mark JSON Dic에서 값 조회
 
 /// JSON Dic에서 JSON String 가져오기
 /// @param jsonDic JSON Dic
 /// @param key 값 조회할 키
 +(NSString*)getStringFromJsonDic:(nonnull NSMutableDictionary*)jsonDic withKey:(nonnull NSString*)key {
-    NSLog(@"start. key : %@", key);
     NSString *result = nil;
     @try {
         NSString *jsonString = [self dicToJson:jsonDic];
@@ -82,60 +88,29 @@
         NSLog(@"exception : %@", exception.description);
         result = nil;
     }
-    NSLog(@"end. return : %@", result);
     return result;
 }
 
-/// JSON String 에서 int 가져오기
-/// @param jsonString JSON String
-/// @param key 값 조회할 키
-+(int)getIntFromJson:(nonnull NSString*)jsonString withKey:(nonnull NSString*)key {
-    NSLog(@"start. jsonString : %@ / key : %@", jsonString, key);
++(int)getIntFromJsonDic:(nonnull NSMutableDictionary*)jsonDic withKey:(nonnull NSString*)key {
     int result = 0;
-    @try {
-        NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-        NSError *error = nil;
-        // NSData -> NSDictionary (JSON Object)
-        NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
-        
-        if (error) {
-            NSLog(@"error : %@", error.description);
-            result = 0;
-        } else {
-            
-            NSString *strResult = [json objectForKey:key];
-            if (strResult == nil) {
-                NSLog(@"값 가져오기 실패");
-                result = 0;
-            } else {
-                
-                result = [strResult intValue];
-            }
-        }
-        
-    } @catch (NSException *exception) {
-        NSLog(@"exception : %@", exception.description);
-        result = 0;
-    }
-    NSLog(@"end. return : %d", result);
-    return  result;
+//    @try {
+//        NSString *jsonString = [self dicToJson:jsonDic];
+//        NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+//        NSError *error = nil;
+//        // NSData -> NSDictionary (JSON Object)
+//        NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
+//        if (error) {
+//            NSLog(@"error : %@", error.description);
+//        } else {
+//            result = [json objectForKey:key];
+//        }
+//    } @catch (NSException *exception) {
+//        NSLog(@"exception : %@", exception.description);
+//        result = nil;
+//    }
+    return result;
 }
 
-/// Json String 에서 Dictionary 추출
-/// @param jsonString JSON String
-/// @param key 추출할 Dictionary key
-+(NSMutableDictionary*)getDicFromJson:(NSString*)jsonString withKey:(NSString*)key {
-    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-    NSError *error = nil;
-    // NSData -> NSDictionary (JSON Object)
-    NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
-    
-    if (error) {
-        NSLog(@"[ERROR] error : %@", error.description);
-        return nil;
-    }
-    return [json objectForKey:key];
-}
 
 #pragma mark - 값 변환
 

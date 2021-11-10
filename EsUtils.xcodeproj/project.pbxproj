@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		2D7B748A273A36270012A105 /* ErrorMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D7B7488273A36270012A105 /* ErrorMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2D7B748B273A36270012A105 /* ErrorMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7B7489273A36270012A105 /* ErrorMgr.m */; };
-		2D7B749F273BBDC70012A105 /* DateMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D7B749D273BBDC70012A105 /* DateMgr.h */; };
+		2D7B749F273BBDC70012A105 /* DateMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D7B749D273BBDC70012A105 /* DateMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2D7B74A0273BBDC70012A105 /* DateMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7B749E273BBDC70012A105 /* DateMgr.m */; };
 		FA088AFF2459E53200F7808D /* FileMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = FA088AEE2459E53200F7808D /* FileMgr.m */; };
 		FA088B002459E53200F7808D /* FileMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = FA088AEF2459E53200F7808D /* FileMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -36,8 +36,8 @@
 		FA8266382737BCF000993E4B /* EncUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8266322737BCF000993E4B /* EncUtil.m */; };
 		FA8266392737BCF000993E4B /* EncAES.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8266332737BCF000993E4B /* EncAES.m */; };
 		FA82663A2737BCF000993E4B /* EncRSA.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8266342737BCF000993E4B /* EncRSA.m */; };
-		FA82663B2737BCF000993E4B /* EncAES.h in Headers */ = {isa = PBXBuildFile; fileRef = FA8266352737BCF000993E4B /* EncAES.h */; };
-		FA82663C2737BCF000993E4B /* EncRSA.h in Headers */ = {isa = PBXBuildFile; fileRef = FA8266362737BCF000993E4B /* EncRSA.h */; };
+		FA82663B2737BCF000993E4B /* EncAES.h in Headers */ = {isa = PBXBuildFile; fileRef = FA8266352737BCF000993E4B /* EncAES.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FA82663C2737BCF000993E4B /* EncRSA.h in Headers */ = {isa = PBXBuildFile; fileRef = FA8266362737BCF000993E4B /* EncRSA.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA8266502737C1A100993E4B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FA82663F2737C1A100993E4B /* Reachability.m */; };
 		FA8266512737C1A100993E4B /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = FA8266402737C1A100993E4B /* Reachability.h */; };
 		FA8266522737C1A100993E4B /* AFSecurityPolicy.h in Headers */ = {isa = PBXBuildFile; fileRef = FA8266422737C1A100993E4B /* AFSecurityPolicy.h */; };
@@ -159,11 +159,11 @@
 		FA088AEC2459E53200F7808D /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				2D7B748C273A37840012A105 /* Date */,
 				FA8B21A723EFE0B2008182EC /* Utils.h */,
 				FA8B21A823EFE0B2008182EC /* Utils.m */,
 				FA8266292737BBD100993E4B /* ConvertMgr.h */,
 				FA82662A2737BBD100993E4B /* ConvertMgr.m */,
+				2D7B748C273A37840012A105 /* Date */,
 				2D7B7487273A35000012A105 /* Auth */,
 				FA088AED2459E53200F7808D /* File */,
 				FA088AF02459E53200F7808D /* UD */,
@@ -341,17 +341,17 @@
 				FA8266272737BB5600993E4B /* DeviceMgr.h in Headers */,
 				FA82661E2737B9A300993E4B /* DesignMgr.h in Headers */,
 				FA088B052459E53200F7808D /* JsonMgr.h in Headers */,
-				2D7B749F273BBDC70012A105 /* DateMgr.h in Headers */,
+				FA82663B2737BCF000993E4B /* EncAES.h in Headers */,
 				FA088B022459E53200F7808D /* UserDefaultsMgr.h in Headers */,
 				FA088B082459E53200F7808D /* HttpMgr.h in Headers */,
+				FA82663C2737BCF000993E4B /* EncRSA.h in Headers */,
+				2D7B749F273BBDC70012A105 /* DateMgr.h in Headers */,
 				FA8266532737C1A100993E4B /* AFNetworkReachabilityManager.h in Headers */,
 				FA088B0C2459E56D00F7808D /* Constants.h in Headers */,
 				FA8266622737C59000993E4B /* HttpOsMgr.h in Headers */,
-				FA82663C2737BCF000993E4B /* EncRSA.h in Headers */,
 				FA8266582737C1A100993E4B /* AFURLResponseSerialization.h in Headers */,
 				FA82666A2737C64200993E4B /* HttpUtls.h in Headers */,
 				FA82665E2737C1A100993E4B /* AFCompatibilityMacros.h in Headers */,
-				FA82663B2737BCF000993E4B /* EncAES.h in Headers */,
 				FA8266662737C59900993E4B /* HttpLibMgr.h in Headers */,
 				FA8266522737C1A100993E4B /* AFSecurityPolicy.h in Headers */,
 				FA82665F2737C1A100993E4B /* AFHTTPSessionManager.h in Headers */,

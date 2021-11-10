@@ -25,7 +25,8 @@ FOUNDATION_EXPORT const unsigned char EsUtilsVersionString[];
 #import <EsUtils/AuthMgr.h>
 #import <EsUtils/FileMgr.h>
 #import <EsUtils/UserDefaultsMgr.h>
-#import <EsUtils/EncMgr.h>
+#import <EsUtils/EncAES.h>
+#import <EsUtils/EncRSA.h>
 #import <EsUtils/EncUtil.h>
 #import <EsUtils/JsonMgr.h>
 #import <EsUtils/HttpMgr.h>

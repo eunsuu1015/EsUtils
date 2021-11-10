@@ -346,7 +346,7 @@ if (!(X)) {                \
 
 #pragma mark - 키쌍 삭제
 
-+ (void)deleteKeyPairRSA {
++(void)deleteKeyPairRSA {
     OSStatus sanityCheck = noErr;
     NSMutableDictionary * queryPublicKey        = [NSMutableDictionary dictionaryWithCapacity:0];
     NSMutableDictionary * queryPrivateKey       = [NSMutableDictionary dictionaryWithCapacity:0];

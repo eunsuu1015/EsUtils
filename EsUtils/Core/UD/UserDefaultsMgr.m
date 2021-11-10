@@ -15,7 +15,7 @@
 /// 저장 String
 /// @param key 키
 /// @param value 값
-+(void)saveUdString:(NSString*)key value:(NSString*)value {
++(void)setString:(NSString*)key value:(NSString*)value {
     @try {
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setObject:value forKey:key];
@@ -27,7 +27,7 @@
 
 /// 조회 String
 /// @param key 키
-+(NSString *)loadUdString:(NSString*)key {
++(NSString*)getString:(NSString*)key {
     @try {
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         NSString *getData = [userDefaults objectForKey:key];
@@ -45,18 +45,31 @@
 /// 저장 Int
 /// @param key 키
 /// @param value 값
-+(void)saveUdInt:(NSString*)key value:(NSInteger)value {
++(void)setInt:(NSString*)key value:(int)value {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setInteger:value forKey:key];
+    [userDefaults setInteger:(NSInteger)value forKey:key];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 /// 조회 Int
 /// @param key 키
-+(NSInteger)loadUdInt:(NSString*)key {
++(int)getInt:(NSString*)key {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSInteger getData = [userDefaults integerForKey:key];
-    return getData;
+    return (int)getData;
+}
+
+
+#pragma mark - BOOL
+
++(void)setBool:(NSString*)key value:(BOOL)value {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setBool:value forKey:key];
+}
+
++(BOOL)getBool:(NSString*)key {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults boolForKey:key];
 }
 
 

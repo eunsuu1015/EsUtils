@@ -15,10 +15,13 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - 값 조회
 
 +(NSString*)getStringFromJson:(NSString*)jsonString withKey:(NSString*)key;
-+(NSMutableArray*)getArrayFromJson:(NSString*)jsonString withKey:(NSString*)key;
-+(NSString*)getStringFromJsonDic:(NSMutableDictionary*)jsonDic withKey:(NSString*)key;
 +(int)getIntFromJson:(NSString*)jsonString withKey:(NSString*)key;
++(NSMutableArray*)getArrayFromJson:(NSString*)jsonString withKey:(NSString*)key;
 +(NSMutableDictionary*)getDicFromJson:(NSString*)jsonString withKey:(NSString*)key;
+
++(NSString*)getStringFromJsonDic:(NSMutableDictionary*)jsonDic withKey:(NSString*)key;
++(int)getIntFromJsonDic:(nonnull NSMutableDictionary*)jsonDic withKey:(nonnull NSString*)key;
+
 
 #pragma mark - 값 변환 (JsonMgr & HttpUtils 중복으로 있음)
 
