@@ -20,7 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 +(void)setLog:(BOOL)log;
 
 
-
 #pragma mark - Storyboard
 
 /// 스토리보드에서 네비게이션 컨트롤러 pushViewController 진행
@@ -63,7 +62,6 @@ NS_ASSUME_NONNULL_BEGIN
 +(void)goAppStore:(nonnull NSString*)appId;
 
 
-
 #pragma mark - Network
 
 /// 네트워크가 연결되어있는지 여부
@@ -71,26 +69,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 현재 네트워크 상태 가져오기
 +(int) getNetworkStatus;
-
-#pragma mark - Date
-
-/// 현재 날짜 조회
-+(NSString*)getDate;
-
-/// 현재 시간 조회
-+(NSString*)getTime;
-
-/// 현재 날짜 및 시간 조회
-+(NSString*)getDateTime;
-
-/// 포맷 형식에 맞춰 현재 날짜 또는 날짜 및 시간 조회
-+(NSString*)getDateTimeWithFormat:(nonnull NSString*)format;
-
-/// 날짜 비교
-+(NSInteger)compareFromStand:(nonnull NSDate *)standard toTarget:(nonnull NSDate *)target;
-
-/// 날짜 텍스트를 NSDate 타입으로 변경
-+(NSDate*)stringToDate:(nonnull NSString*)string;
 
 
 #pragma mark - Etc

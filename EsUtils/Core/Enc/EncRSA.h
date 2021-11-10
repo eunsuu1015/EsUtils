@@ -16,14 +16,10 @@ static NSString *keyTagPub = @"com.es1015.encrypt.pubkey";
 static NSString *keyTagPri = @"com.es1015.encrypt.prikey";
     
 
-typedef void (^RSACompletionBlock2)(void);
-
 /// RSA 암호화 클래스. EncMgr클래스를 통해 호출한다
 /// 현재 개인키로 암호화, 공개키로 복호화는 기능 작동이 안된다
 @interface EncRSA : NSObject
 
-
--(instancetype)init;
 
 #pragma mark - 암호화
 
@@ -33,6 +29,7 @@ typedef void (^RSACompletionBlock2)(void);
 /// @param plainText 암호화할 값
 /// @return 암호화된 값
 +(NSData*)encryptByPublicKey:(SecKeyRef)publicKey plainText:(NSData*)plainText;
++(NSString*)encryptByPublicKeyString:(SecKeyRef)publicKey plainText:(NSString*)plainText;
 
 /// 개인키로 암호화 (사용 불가)
 /// 개인키로 암호화 시, 공개키로 복호화 진행
@@ -57,9 +54,11 @@ typedef void (^RSACompletionBlock2)(void);
 /// @param encText 암호화된 값
 /// @return 복호화된 값
 +(NSData*)decryptByPrivateKey:(SecKeyRef)privateKey encText:(NSData*)encText;
++(NSString*)decryptByPrivateKeyString:(SecKeyRef)privateKey encText:(NSString*)encText;
 
+#pragma mark - 키 관리
 
-#pragma mark - 키 객체 가져오기
+#pragma mark 키 객체 가져오기
 
 /// 공개키 객체 가져오기
 /// @return 공개키
@@ -70,10 +69,7 @@ typedef void (^RSACompletionBlock2)(void);
 +(SecKeyRef)getPrivateKeyRef;
 
 
-#pragma mark - 키쌍 생성
-
-/// 기존에 사용하던 동기식 함수
--(void)generateRSAKeyPair:(void (^)(void))completion;
+#pragma mark 키쌍 생성
 
 /// 동기식. 추가한 함수. 결과 리턴
 /// 200728 설명 추가. AuthTL_Core 에서 사용하고 있는 함수.
@@ -81,19 +77,19 @@ typedef void (^RSACompletionBlock2)(void);
 +(BOOL)generateRSAKeyPairSync;
 
 
-#pragma mark - 키쌍 삭제
+#pragma mark 키쌍 삭제
 
 /// 키 쌍 삭제
 +(void)deleteKeyPairRSA;
 
 
-#pragma mark - 키쌍 존재 여부 확인
+#pragma mark 키쌍 존재 여부 확인
 
 /// 키쌍 존재 여부 확인
 +(BOOL)isKeyPairExist;
 
 
-#pragma mark - 키 태그 관리
+#pragma mark 키 태그 관리
 
 /// 공개키 태그 조회
 /// @return 공개키 태그
@@ -110,11 +106,6 @@ typedef void (^RSACompletionBlock2)(void);
 /// 개인키 태그 설정
 /// @param tag 설정할 공개키 태그
 +(void)setKeyTagPri:(NSString *)tag;
-
-/// 키 태그 마지막 글자 조회(?)
-+(NSString*)getKeyTagLastString;
-
-
 
 @end
 

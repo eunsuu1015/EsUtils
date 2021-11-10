@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		2D7B748A273A36270012A105 /* ErrorMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D7B7488273A36270012A105 /* ErrorMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2D7B748B273A36270012A105 /* ErrorMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7B7489273A36270012A105 /* ErrorMgr.m */; };
+		2D7B749F273BBDC70012A105 /* DateMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D7B749D273BBDC70012A105 /* DateMgr.h */; };
+		2D7B74A0273BBDC70012A105 /* DateMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7B749E273BBDC70012A105 /* DateMgr.m */; };
 		FA088AFF2459E53200F7808D /* FileMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = FA088AEE2459E53200F7808D /* FileMgr.m */; };
 		FA088B002459E53200F7808D /* FileMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = FA088AEF2459E53200F7808D /* FileMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA088B012459E53200F7808D /* UserDefaultsMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = FA088AF12459E53200F7808D /* UserDefaultsMgr.m */; };
 		FA088B022459E53200F7808D /* UserDefaultsMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = FA088AF22459E53200F7808D /* UserDefaultsMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FA088B032459E53200F7808D /* EncMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = FA088AF42459E53200F7808D /* EncMgr.m */; };
-		FA088B042459E53200F7808D /* EncMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = FA088AF52459E53200F7808D /* EncMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA088B052459E53200F7808D /* JsonMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = FA088AF72459E53200F7808D /* JsonMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA088B062459E53200F7808D /* JsonMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = FA088AF82459E53200F7808D /* JsonMgr.m */; };
 		FA088B072459E53200F7808D /* HttpMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = FA088AFA2459E53200F7808D /* HttpMgr.m */; };
@@ -68,12 +68,12 @@
 /* Begin PBXFileReference section */
 		2D7B7488273A36270012A105 /* ErrorMgr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ErrorMgr.h; sourceTree = "<group>"; };
 		2D7B7489273A36270012A105 /* ErrorMgr.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ErrorMgr.m; sourceTree = "<group>"; };
+		2D7B749D273BBDC70012A105 /* DateMgr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateMgr.h; sourceTree = "<group>"; };
+		2D7B749E273BBDC70012A105 /* DateMgr.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DateMgr.m; sourceTree = "<group>"; };
 		FA088AEE2459E53200F7808D /* FileMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileMgr.m; sourceTree = "<group>"; };
 		FA088AEF2459E53200F7808D /* FileMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileMgr.h; sourceTree = "<group>"; };
 		FA088AF12459E53200F7808D /* UserDefaultsMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaultsMgr.m; sourceTree = "<group>"; };
 		FA088AF22459E53200F7808D /* UserDefaultsMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefaultsMgr.h; sourceTree = "<group>"; };
-		FA088AF42459E53200F7808D /* EncMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncMgr.m; sourceTree = "<group>"; };
-		FA088AF52459E53200F7808D /* EncMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncMgr.h; sourceTree = "<group>"; };
 		FA088AF72459E53200F7808D /* JsonMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonMgr.h; sourceTree = "<group>"; };
 		FA088AF82459E53200F7808D /* JsonMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JsonMgr.m; sourceTree = "<group>"; };
 		FA088AFA2459E53200F7808D /* HttpMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpMgr.m; sourceTree = "<group>"; };
@@ -150,6 +150,8 @@
 		2D7B748C273A37840012A105 /* Date */ = {
 			isa = PBXGroup;
 			children = (
+				2D7B749D273BBDC70012A105 /* DateMgr.h */,
+				2D7B749E273BBDC70012A105 /* DateMgr.m */,
 			);
 			path = Date;
 			sourceTree = "<group>";
@@ -194,8 +196,6 @@
 		FA088AF32459E53200F7808D /* Enc */ = {
 			isa = PBXGroup;
 			children = (
-				FA088AF52459E53200F7808D /* EncMgr.h */,
-				FA088AF42459E53200F7808D /* EncMgr.m */,
 				FA8266352737BCF000993E4B /* EncAES.h */,
 				FA8266332737BCF000993E4B /* EncAES.m */,
 				FA8266362737BCF000993E4B /* EncRSA.h */,
@@ -341,9 +341,9 @@
 				FA8266272737BB5600993E4B /* DeviceMgr.h in Headers */,
 				FA82661E2737B9A300993E4B /* DesignMgr.h in Headers */,
 				FA088B052459E53200F7808D /* JsonMgr.h in Headers */,
+				2D7B749F273BBDC70012A105 /* DateMgr.h in Headers */,
 				FA088B022459E53200F7808D /* UserDefaultsMgr.h in Headers */,
 				FA088B082459E53200F7808D /* HttpMgr.h in Headers */,
-				FA088B042459E53200F7808D /* EncMgr.h in Headers */,
 				FA8266532737C1A100993E4B /* AFNetworkReachabilityManager.h in Headers */,
 				FA088B0C2459E56D00F7808D /* Constants.h in Headers */,
 				FA8266622737C59000993E4B /* HttpOsMgr.h in Headers */,
@@ -437,6 +437,7 @@
 				FA088AFF2459E53200F7808D /* FileMgr.m in Sources */,
 				FA82661F2737B9A300993E4B /* DesignMgr.m in Sources */,
 				FA8266302737BC0B00993E4B /* AuthMgr.m in Sources */,
+				2D7B74A0273BBDC70012A105 /* DateMgr.m in Sources */,
 				FA8266592737C1A100993E4B /* AFURLSessionManager.m in Sources */,
 				FA8266242737BB0900993E4B /* DefaultAlert.m in Sources */,
 				FA8266382737BCF000993E4B /* EncUtil.m in Sources */,
@@ -449,7 +450,6 @@
 				FA8266562737C1A100993E4B /* AFURLResponseSerialization.m in Sources */,
 				FA088B062459E53200F7808D /* JsonMgr.m in Sources */,
 				FA8B21AA23EFE0B2008182EC /* Utils.m in Sources */,
-				FA088B032459E53200F7808D /* EncMgr.m in Sources */,
 				FA088B092459E53200F7808D /* DBMgr.m in Sources */,
 				FA82666B2737C64200993E4B /* HttpUtls.m in Sources */,
 				FA088B012459E53200F7808D /* UserDefaultsMgr.m in Sources */,

@@ -20,6 +20,7 @@ typedef enum : NSInteger {
     
 #pragma mark 암호화
     ERROR_NULL_KEY              = -11000,
+    ERROR_FAIL_GEN_KEY_PAIR     = -11001,
 
 } ERROR;
 
