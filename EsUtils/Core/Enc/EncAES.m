@@ -14,14 +14,14 @@
 
 #pragma mark - enc
 
-+(NSString*)encryptString:(NSString*)keys iv:(char*)iv plainText:(NSString*)plainText keySize:(int)keySize {
++(NSString*)encryptString:plainText key:(NSString*)key iv:(char*)iv  keySize:(int)keySize {
     NSData *plainData = [EncUtil encodeUTF8:plainText];
-    NSData *result = [self encrypt:keys iv:iv plainText:plainData keySize:keySize];
+    NSData *result = [self encrypt:plainData keys:key iv:iv keySize:keySize];
     return [EncUtil encodeB64ToString:result];
 }
 
-+(NSData*)encrypt:(NSString*)keys iv:(char*)iv plainText:(NSData*)plainText keySize:(int)keySize {
-    if (keys == nil) {
++(NSData*)encrypt:(NSData*)plainText keys:(NSString*)key iv:(char*)iv keySize:(int)keySize {
+    if (key == nil) {
         [ErrorMgr.sharedInstance setErrCode:ERROR_NULL_KEY];
         return nil;
     }
@@ -35,7 +35,7 @@
     bzero( keyPtr, sizeof(keyPtr) );
     
     // NSString keys -> NSData keys (원래는 keys를 NSString로 받아서 했던 과정인데 NSData로 받아서 주석처리)
-    [keys getCString: keyPtr maxLength: sizeof(keyPtr) encoding:NSUTF8StringEncoding];
+    [key getCString: keyPtr maxLength: sizeof(keyPtr) encoding:NSUTF8StringEncoding];
     
     size_t numBytesEncrypted = 0x00;
     
@@ -71,17 +71,18 @@
     return nil;
 }
 
+
 #pragma mark - dec
 
-+(NSString*)decryptString:(NSString*)keys iv:(char*)iv encText:(NSString*)encText keySize:(int)keySize {
++(NSString*)decryptString:(NSString*)encText keys:(NSString*)key iv:(char*)iv  keySize:(int)keySize {
     NSData *encData = [EncUtil encodeB64StringToData:encText];
-    NSData *result = [self decrypt:keys iv:iv encText:encData keySize:keySize];
+    NSData *result = [self decrypt:encData key:key iv:iv keySize:keySize];
     return [EncUtil decodeUTF8:result];
 }
 
-+(NSData*)decrypt:(NSString*)keys iv:(char*)iv encText:(NSData*)encText keySize:(int)keySize {
++(NSData*)decrypt:(NSData*)encText key:(NSString*)key iv:(char*)iv keySize:(int)keySize {
     
-    if (keys == nil) {
+    if (key == nil) {
         [ErrorMgr.sharedInstance setErrCode:ERROR_NULL_KEY];
         return nil;
     }
@@ -96,7 +97,7 @@
     
     // NSString keys -> NSData keys (원래는 keys를 NSString로 받아서 했던 과정인데 NSData로 받아서 주석처리)
     //    // fetch key data
-    [keys getCString: keyPtr maxLength: sizeof(keyPtr) encoding: NSUTF8StringEncoding];
+    [key getCString: keyPtr maxLength: sizeof(keyPtr) encoding: NSUTF8StringEncoding];
     
     // NSString encText -> NSData valueData (원래는 encText를 NSString로 받아서 했던 과정인데 NSData로 받아서 주석처리)
     //    NSData *valueData = [[NSData alloc] initWithBase64EncodedString:encText options:0];

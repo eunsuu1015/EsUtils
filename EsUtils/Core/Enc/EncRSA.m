@@ -36,14 +36,14 @@ if (!(X)) {                \
 
 #pragma mark - 암호화
 
-+(NSString*)encryptByPublicKeyString:(SecKeyRef)publicKey plainText:(NSString*)plainText {
++(NSString*)enryptString:(NSString*)plainText byPublicKey:(SecKeyRef)publicKey {
     NSData *plainData = [EncUtil encodeUTF8:plainText];
     NSData *result = [self encryptByPublicKey:publicKey plainText:plainData];
     return [EncUtil encodeB64ToString:result];
 }
 
 // 공개키로 암호화
-+(NSData*)encryptByPublicKey:(SecKeyRef)publicKey plainText:(NSData*)plainText {
++(NSData*)encrypt:(NSData*)plainText byPublicKey:(SecKeyRef)publicKey {
     SecKeyRef key = publicKey;
     
     // 에러 체크, 추가
@@ -93,7 +93,7 @@ if (!(X)) {                \
 
 
 // 전에 테스트했을 때 정상 작동 안했음
-+(NSData*)encryptByPrivateKey:(SecKeyRef)privateKey plainText:(NSData*)plainText {
++(NSData*)encrypt:(NSData*)plainText byPrivateKey:(SecKeyRef)privateKey {
     SecKeyRef key = privateKey;
     
     // 에러 체크, 추가
@@ -145,7 +145,7 @@ if (!(X)) {                \
 #pragma mark - 복호화
 
 // 전에 테스트했을 때 정상 작동 안했음
-+(NSData*)decryptByPublicKey:(SecKeyRef)publicKey encText:(NSData*)encText {
++(NSData*)decrypt:(NSData*)encText byPublicKey:(SecKeyRef)publicKey {
     NSData *wrappedSymmetricKey = encText;
     
     if (wrappedSymmetricKey == nil) {
@@ -188,14 +188,14 @@ if (!(X)) {                \
     return bits;
 }
 
-+(NSString*)decryptByPrivateKeyString:(SecKeyRef)privateKey encText:(NSString*)encText {
++(NSString*)decryptString:(NSString*)encText byPrivateKey:(SecKeyRef)privateKey {
     NSData *encData = [EncUtil encodeB64StringToData:encText];
     NSData *result = [self decryptByPublicKey:privateKey encText:encData];
     return [EncUtil decodeUTF8:result];
 }
 
 // 개인키로 복호화
-+(NSData*)decryptByPrivateKey:(SecKeyRef)privateKey encText:(NSData*)encText {
++(NSData*)decrypt:(NSData*)encText byPrivateKey:(SecKeyRef)privateKey {
     NSData *wrappedSymmetricKey = encText;
     
     if (wrappedSymmetricKey == nil) {

@@ -15,28 +15,28 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - enc
 
-+(NSString*)encryptString:(NSString*)keys iv:(char*)iv plainText:(NSString*)plainText keySize:(int)keySize;
++(NSString*)encryptString:plainText key:(NSString*)key iv:(char*)iv  keySize:(int)keySize;
 
 /// AES 암호화
-/// @param keys 키
+/// @param key 키
 /// @param iv 이미지 벡터
 /// @param plainText 암호화할 값
 /// @param keySize 키 사이즈 (128, 256, ...)
 /// @return 암호화된 값
-+(NSData*)encrypt:(NSString*)keys iv:(char*)iv plainText:(NSData*)plainText keySize:(int)keySize;
++(NSData*)encrypt:(NSData*)plainText keys:(NSString*)key iv:(char*)iv keySize:(int)keySize;
 
 
 #pragma mark - dec
 
-+(NSString*)decryptString:(NSString*)keys iv:(char*)iv encText:(NSString*)encText keySize:(int)keySize;
++(NSString*)decryptString:(NSString*)encText keys:(NSString*)key iv:(char*)iv  keySize:(int)keySize;
 
 /// AES 복호화
-/// @param keys 키
+/// @param key 키
 /// @param iv 이미지 벡터
 /// @param encText 복호화할 값
 /// @param keySize 키 사이즈 (128, 256, ...)
 /// @return 복호화된 값
-+(NSData*)decrypt:(NSString*)keys iv:(char*)iv encText:(NSData*)encText keySize:(int)keySize;
++(NSData*)decrypt:(NSData*)encText key:(NSString*)key iv:(char*)iv keySize:(int)keySize;
 
 @end
 
