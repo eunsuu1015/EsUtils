@@ -11,17 +11,15 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef enum : NSInteger {
-    ERROR_CODE_NONE                                  = 0,
-
+    ERROR_CODE_NONE             = 0,
+    
 #pragma mark 공통
-    ERROR_NULL_PARAM                    = -10000,
-    
-    
+    ERROR_NULL_PARAM            = -10000,
     
 #pragma mark 암호화
     ERROR_NULL_KEY              = -11000,
     ERROR_FAIL_GEN_KEY_PAIR     = -11001,
-
+    
 } ERROR;
 
 

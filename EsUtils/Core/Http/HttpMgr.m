@@ -8,7 +8,7 @@
 
 #import "HttpMgr.h"
 
-#import "HttpOsMgr.h"
+#import "HttpOSMgr.h"
 #import "HttpLibMgr.h"
 
 
@@ -42,24 +42,24 @@
 }
 
 
-#pragma mark - Os
+#pragma mark - OS
 
 +(void)postOsJsonString:(NSString*)url param:(NSString*)param header:(nullable NSDictionary*)header timeout:(int)timeout urlSession:(nullable id <NSURLSessionDelegate>)urlSession
                 success:(void (^)(id responseObject))success
                 failure:(void (^)(NSError *error))failure {
-    [HttpOsMgr postJSONString:url param:param header:header timeout:timeout urlSession:urlSession success:success failure:failure];
+    [HttpOSMgr postJSONString:url param:param header:header timeout:timeout urlSession:urlSession success:success failure:failure];
 }
 
 +(void)postOsJSONDic:(NSString*)url param:(NSDictionary*)param header:(nullable NSDictionary*)header timeout:(int)timeout urlSession:(nullable id <NSURLSessionDelegate>)urlSession
              success:(void (^)(id responseObject))success
              failure:(void (^)(NSError *error))failure {
-    [HttpOsMgr postJSONDic:url param:param header:header timeout:timeout urlSession:urlSession success:success failure:failure];
+    [HttpOSMgr postJSONDic:url param:param header:header timeout:timeout urlSession:urlSession success:success failure:failure];
 }
 
 +(void)postOsJSONData:(NSString*)url param:(NSData*)param header:(nullable NSDictionary*)header timeout:(int)timeout urlSession:(nullable id <NSURLSessionDelegate>)urlSession
               success:(void (^)(id responseObject))success
               failure:(void (^)(NSError *error))failure {
-    [HttpOsMgr postJSONData:url param:param header:header timeout:timeout urlSession:urlSession success:success failure:failure];
+    [HttpOSMgr postJSONData:url param:param header:header timeout:timeout urlSession:urlSession success:success failure:failure];
 }
 
 @end

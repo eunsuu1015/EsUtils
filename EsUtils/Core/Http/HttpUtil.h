@@ -23,20 +23,20 @@ NS_ASSUME_NONNULL_BEGIN
 #define CONTENT_TYPE @"Content-Type"
 #define CONTENT_LENGTH @"Content-Length"
 
-@interface HttpUtls : NSObject
+@interface HttpUtil : NSObject
 
-+(NSString *)trim:(NSString *)strInput;
+/// 공백 제거
+/// @param string 공백 제거할 텍스트
++(NSString *)trim:(NSString *)string;
+
+/// JSON, Query String 형식에 맞는 헤더 추가
 +(NSMutableDictionary*)setDefaultDic:(BOOL)isJson;
+
+/// header를 sessionManager에 추가
 +(AFHTTPSessionManager*)setLibHeader:(NSDictionary*)dic sessionManager:(AFHTTPSessionManager *)sessionManager;
+
+/// header를 urlRequest에 추가
 +(NSMutableURLRequest*)addOsHeader:(NSDictionary*)dic urlRequest:(NSMutableURLRequest*)urlRequest;
-
-#pragma mark - 값 변환 (JsonMgr & HttpUtils 중복으로 있음)
-
-+(NSMutableDictionary*)jsonToDic:(nonnull NSString*)json;
-+(NSString*)dicToJson:(nonnull NSMutableDictionary*)dic;
-+(NSString*)queryStringToJson:(nonnull NSString*)queryString;
-+(NSString*)jsonToQueryString:(nonnull NSString*)json;
-
 
 @end
 

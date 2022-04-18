@@ -8,9 +8,8 @@
 
 #import "HttpLibMgr.h"
 #import "AFHTTPSessionManager.h"
-#import "Utils.h"
-#import "JsonMgr.h"
-#import "HttpUtls.h"
+#import "JSONMgr.h"
+#import "HttpUtil.h"
 
 @implementation HttpLibMgr
 
@@ -37,7 +36,7 @@
     NSString *strParam = nil;
     if (param != nil) {
         NSMutableDictionary *mutableDicParam = [param mutableCopy];
-        strParam = [HttpUtls dicToJson:mutableDicParam];
+        strParam = [JSONMgr dicToJson:mutableDicParam];
     }
     
     [self post:url param:strParam isJson:YES header:header timeout:timeout success:^(id responseObject) {
@@ -62,12 +61,11 @@
             success:(void (^)(id responseObject))success
             failure:(void (^)(NSError *error))failure {
     
-    // TODO: 작업 필요
     // Dic -> String
     NSString *strParam = nil;
     if (param != nil) {
         NSMutableDictionary *mutableDicParam = [param mutableCopy];
-        strParam = [HttpUtls dicToJson:mutableDicParam];
+        strParam = [JSONMgr dicToJson:mutableDicParam];
     }
     
     [self post:url param:strParam isJson:NO header:header timeout:timeout success:^(id responseObject) {
@@ -78,7 +76,7 @@
 }
 
 
-#pragma mark - 최종적으로 호출하는 공통 함수
+#pragma mark - 공통
 
 /// GET
 + (void)get:(NSString *)url header:(nullable NSDictionary*)header timeout:(int)timeout
@@ -94,17 +92,15 @@
     [sessionManager.securityPolicy setAllowInvalidCertificates:YES];
     [sessionManager.securityPolicy setValidatesDomainName:NO];
     
-    //header
+    // header
     NSMutableDictionary *dicHeader = [[NSMutableDictionary alloc] init];
     [dicHeader addEntriesFromDictionary:header];
-    sessionManager = [HttpUtls setLibHeader:header sessionManager:sessionManager];
+    sessionManager = [HttpUtil setLibHeader:header sessionManager:sessionManager];
     
     [sessionManager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         success(responseObject);
-        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failure(error);
-        
     }];
 }
 
@@ -128,27 +124,24 @@
     [sessionManager.securityPolicy setValidatesDomainName:NO];
     
     // header
-    NSMutableDictionary *dicHeader = [HttpUtls setDefaultDic:isJson];
+    NSMutableDictionary *dicHeader = [HttpUtil setDefaultDic:isJson];
     [dicHeader addEntriesFromDictionary:header];
-    sessionManager = [HttpUtls setLibHeader:dicHeader sessionManager:sessionManager];
+    sessionManager = [HttpUtil setLibHeader:dicHeader sessionManager:sessionManager];
     
     // param
     id finalParams = nil;
     if (isJson) {   // json이면 dictionary로 보냄
         NSMutableDictionary *dicParams = [[NSMutableDictionary alloc] init];
-        dicParams = [HttpUtls jsonToDic:param];
+        dicParams = [JSONMgr jsonToDic:param];
         finalParams = dicParams;
-        
     } else {        // query면 string으로 보냄
         finalParams = param;
     }
     
     [sessionManager POST:url parameters:finalParams progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         success(responseObject);
-        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failure(error);
-        
     }];
 }
 

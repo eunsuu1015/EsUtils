@@ -24,13 +24,12 @@
 
 -(nullable NSString *)getMsgFromErrCode:(int)errCode {
     NSString *errMsg = @"알 수 없는 오류 발생";
-            
     ERROR code = errCode;
     
     switch (code) {
         case ERROR_CODE_NONE:
             return @"오류 없음";
-
+            
 #pragma mark 공통
             
         case ERROR_NULL_PARAM:
@@ -39,8 +38,8 @@
 #pragma mark 암호화
         case ERROR_NULL_KEY:
             return @"암호화 키가 없습니다.";
-        
-        default:    // 스마트 컨트랙트 오류
+            
+        default:
             return errMsg;
     }
 }

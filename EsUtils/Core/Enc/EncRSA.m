@@ -8,7 +8,6 @@
 
 #import "EncRSA.h"
 #import "EncUtil.h"
-#import <CommonCrypto/CommonCryptor.h>
 
 #if DEBUG
 #define LOGGING_FACILITY(X, Y)    \
@@ -36,17 +35,20 @@ if (!(X)) {                \
 
 #pragma mark - 암호화
 
+/// 공개키로 암호화
+/// @param plainText 평문 텍스트
+/// @param publicKey 공개키
 +(NSString*)enryptString:(NSString*)plainText byPublicKey:(SecKeyRef)publicKey {
     NSData *plainData = [EncUtil encodeUTF8:plainText];
-    NSData *result = [self encryptByPublicKey:publicKey plainText:plainData];
+    NSData *result = [self encrypt:plainData byPublicKey:publicKey];
     return [EncUtil encodeB64ToString:result];
 }
 
-// 공개키로 암호화
+/// 공개키로 암호화
+/// @param plainText 평문 데이터
+/// @param publicKey 공개키
 +(NSData*)encrypt:(NSData*)plainText byPublicKey:(SecKeyRef)publicKey {
     SecKeyRef key = publicKey;
-    
-    // 에러 체크, 추가
     if (key == nil) {
         [ErrorMgr.sharedInstance setErrCode:ERROR_NULL_KEY];
         return nil;
@@ -62,7 +64,6 @@ if (!(X)) {                \
     NSMutableData *encryptedData = [NSMutableData dataWithCapacity:0];
     
     for (int i=0; i<blockCount; i++) {
-        
         int bufferSize = (int)MIN(blockSize,[plainTextBytes length] - i * blockSize);
         NSData *buffer = [plainTextBytes subdataWithRange:NSMakeRange(i * blockSize, bufferSize)];
         
@@ -78,7 +79,6 @@ if (!(X)) {                \
             [encryptedData appendData:encryptedBytes];
             
         } else {
-            
             if (cipherBuffer) {
                 free(cipherBuffer);
             }
@@ -86,17 +86,17 @@ if (!(X)) {                \
         }
     }
     if (cipherBuffer) free(cipherBuffer);
-    
-    //    return [encryptedData base64EncodedStringWithOptions:0];
     return encryptedData;
 }
 
 
-// 전에 테스트했을 때 정상 작동 안했음
+// TODO: 작동 안됨
+/// 개인키 암호화 (사용 불가)
+/// @param plainText 평문 데이터
+/// @param privateKey 개인키
 +(NSData*)encrypt:(NSData*)plainText byPrivateKey:(SecKeyRef)privateKey {
     SecKeyRef key = privateKey;
     
-    // 에러 체크, 추가
     if (key == nil) {
         [ErrorMgr.sharedInstance setErrCode:ERROR_NULL_KEY];
         return nil;
@@ -136,15 +136,16 @@ if (!(X)) {                \
         }
     }
     if (cipherBuffer) free(cipherBuffer);
-    
-    //    return [encryptedData base64EncodedStringWithOptions:0];
     return encryptedData;
 }
 
 
 #pragma mark - 복호화
 
-// 전에 테스트했을 때 정상 작동 안했음
+// TODO: 작동 안됨
+/// 공개키로 복호화 (사용 불가)
+/// @param encText 암호화된 데이터
+/// @param publicKey 공개키
 +(NSData*)decrypt:(NSData*)encText byPublicKey:(SecKeyRef)publicKey {
     NSData *wrappedSymmetricKey = encText;
     
@@ -156,7 +157,6 @@ if (!(X)) {                \
     // usingPublicKey 값에 따라 공개키 다는 개인키를 세팅한다
     SecKeyRef key = publicKey;
     
-    // 에러 체크, 추가
     if (key == nil) {
         [ErrorMgr.sharedInstance setErrCode:ERROR_NULL_KEY];
         return nil;
@@ -175,26 +175,26 @@ if (!(X)) {                \
     
     if (sanityCheck != 0) {
         NSError *error = [NSError errorWithDomain:NSOSStatusErrorDomain code:sanityCheck userInfo:nil];
-        // KSLOG_DEBUG(@"Error: %@", [error description]);
         return nil;
     }
     
     NSAssert(sanityCheck == noErr, @"Error decrypting, OSStatus == %ld.", (long)sanityCheck);
-    
-    
     [bits setLength:keyBufferSize];
-    
-    //    return [[NSString alloc] initWithData:bits encoding:NSUTF8StringEncoding];
     return bits;
 }
 
+/// 개인키로 복호화
+/// @param encText 암호화된 텍스트
+/// @param privateKey 개인키
 +(NSString*)decryptString:(NSString*)encText byPrivateKey:(SecKeyRef)privateKey {
     NSData *encData = [EncUtil encodeB64StringToData:encText];
-    NSData *result = [self decryptByPublicKey:privateKey encText:encData];
+    NSData *result = [self decrypt:encData byPrivateKey:privateKey];
     return [EncUtil decodeUTF8:result];
 }
 
-// 개인키로 복호화
+/// 개인키로 복호화
+/// @param encText 암호화된 데이터
+/// @param privateKey 개인키
 +(NSData*)decrypt:(NSData*)encText byPrivateKey:(SecKeyRef)privateKey {
     NSData *wrappedSymmetricKey = encText;
     
@@ -206,7 +206,6 @@ if (!(X)) {                \
     // usingPublicKey 값에 따라 공개키 다는 개인키를 세팅한다
     SecKeyRef key = privateKey;
     
-    // 에러 체크, 추가
     if (key == nil) {
         [ErrorMgr.sharedInstance setErrCode:ERROR_NULL_KEY];
         return nil;
@@ -225,27 +224,19 @@ if (!(X)) {                \
     
     if (sanityCheck != 0) {
         NSError *error = [NSError errorWithDomain:NSOSStatusErrorDomain code:sanityCheck userInfo:nil];
-        // KSLOG_DEBUG(@"Error: %@", [error description]);
         return nil;
     }
     
     NSAssert(sanityCheck == noErr, @"Error decrypting, OSStatus == %ld.", (long)sanityCheck);
-    
-    
     [bits setLength:keyBufferSize];
-    
-    //    return [[NSString alloc] initWithData:bits encoding:NSUTF8StringEncoding];
     return bits;
 }
 
-#pragma mark -
-#pragma mark --------------------------------
-#pragma mark 키 관리
-#pragma mark --------------------------------
 
+#pragma mark - 키 관리
+#pragma mark 키 객체 가져오기
 
-#pragma mark - 키 객체 가져오기
-
+/// 공개키 가져오기
 +(SecKeyRef)getPublicKeyRef {
     OSStatus resultCode = noErr;
     SecKeyRef publicKeyRef = nil;
@@ -267,6 +258,7 @@ if (!(X)) {                \
     return publicKeyRef;
 }
 
+/// 개인키 가져오기
 +(SecKeyRef)getPrivateKeyRef {
     OSStatus resultCode = noErr;
     SecKeyRef privateKeyRef = nil;
@@ -288,11 +280,9 @@ if (!(X)) {                \
     return privateKeyRef;
 }
 
+#pragma mark 키쌍 생성
 
-#pragma mark - 키쌍 생성
-
-// 비동기식. 추가한 함수. 결과 리턴
-// 200728 설명 추가. AuthTL_Core 에서 사용하고 있는 함수.
+// 비동기식 키쌍 생성
 +(BOOL)generateRSAKeyPairSync {
     OSStatus sanityCheck = noErr;
     SecKeyRef publicKeyRef = NULL;
@@ -343,9 +333,9 @@ if (!(X)) {                \
     return YES;
 }
 
+#pragma mark 키쌍 삭제
 
-#pragma mark - 키쌍 삭제
-
+/// 키 쌍 삭제
 +(void)deleteKeyPairRSA {
     OSStatus sanityCheck = noErr;
     NSMutableDictionary * queryPublicKey        = [NSMutableDictionary dictionaryWithCapacity:0];
@@ -365,12 +355,6 @@ if (!(X)) {                \
     sanityCheck = SecItemDelete((__bridge CFDictionaryRef)queryPrivateKey);
     LOGGING_FACILITY1( sanityCheck == noErr || sanityCheck == errSecItemNotFound, @"Error removing private key, OSStatus == %ld.", (long)sanityCheck );
     if (sanityCheck != 0) {
-        // KSLOG_DEBUG(@"%s fail private key delete. OSStatus : %ld", __FUNCTION__, (long)sanityCheck);
-        // 에러 체크, 추가
-        //        AuthManager *lm = [AuthManager getInstance];
-        //                [lm setErrorCode:LM_FAIL_DEL_RSA_KEY];
-        //                [lm setErrorText:LM_FAIL_DEL_RSA_KEY_TXT];
-        //                // KSLOG_DEBUG(@"%s errorCode : %d / errorText : %@", __FUNCTION__, [lm getErrorCode], [lm getErrorText]);
         return;
     }
     
@@ -378,28 +362,14 @@ if (!(X)) {                \
     sanityCheck = SecItemDelete((__bridge CFDictionaryRef)queryPublicKey);
     LOGGING_FACILITY1( sanityCheck == noErr || sanityCheck == errSecItemNotFound, @"Error removing public key, OSStatus == %ld.", (long)sanityCheck );
     if (sanityCheck != 0) {
-        // KSLOG_DEBUG(@"%s fail public key delete. OSStatus : %ld", __FUNCTION__, (long)sanityCheck);
-        // 에러 체크, 추가
-        //        AuthManager *lm = [AuthManager getInstance];
-        //                [lm setErrorCode:LM_FAIL_DEL_RSA_KEY];
-        //                [lm setErrorText:LM_FAIL_DEL_RSA_KEY_TXT];
-        //                // KSLOG_DEBUG(@"%s errorCode : %d / errorText : %@", __FUNCTION__, [lm getErrorCode], [lm getErrorText]);
         return;
     }
-    
-    //    if (publicKeyRef) CFRelease(publicKeyRef);
-    //    if (privateKeyRef) CFRelease(privateKeyRef);
-    // KSLOG_DEBUG(@"%s end",__FUNCTION__);
 }
 
+#pragma mark 키쌍 존재 여부 확인
 
-#pragma mark - 키쌍 존재 여부 확인
-
-/**
- * 키체인에 키쌍이 존재하는지 확인, 추가
- * @return  키쌍 존재 여부
- */
-+(BOOL) isKeyPairExist {
+/// 키쌍 존재 여부 확인
++(BOOL)isKeyPairExist {
     SecKeyRef privateKeyRef;
     SecKeyRef publicKeyRef;
     
@@ -416,21 +386,24 @@ if (!(X)) {                \
 
 #pragma mark - 키 태그 가져오기
 
+/// 공개키 태그 조회
 +(NSString*)getKeyAllTagPub {
     return keyTagPub;
 }
 
+/// 개인키 태그 조회
 +(NSString*)getKeyAllTagPri {
     return keyTagPri;
 }
 
+/// 공개키 태그 설정
 +(void)setKeyTagPub:(NSString *)tag {
     keyTagPub = tag;
 }
 
+/// 개인키 태그 설정
 +(void)setKeyTagPri:(NSString *)tag {
     keyTagPri = tag;
 }
-
 
 @end

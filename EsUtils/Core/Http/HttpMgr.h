@@ -32,8 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
                success:(void (^)(id responseObject))success
                failure:(void (^)(NSError *error))failure;
 
+#pragma mark - OS
 
-#pragma mark - Os
 
 +(void)postOsJsonString:(NSString*)url param:(NSString*)param header:(nullable NSDictionary*)header timeout:(int)timeout urlSession:(nullable id <NSURLSessionDelegate>)urlSession
                 success:(void (^)(id responseObject))success

@@ -11,10 +11,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// AES 암호화 클래스. EncMgr클래스를 통해 호출한다
+// TODO: 확인 필요
 @interface EncAES : NSObject
 
 #pragma mark - enc
 
+/// AES 암호화
 +(NSString*)encryptString:plainText key:(NSString*)key iv:(char*)iv  keySize:(int)keySize;
 
 /// AES 암호화
@@ -28,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - dec
 
+/// AES 복호화
 +(NSString*)decryptString:(NSString*)encText keys:(NSString*)key iv:(char*)iv  keySize:(int)keySize;
 
 /// AES 복호화

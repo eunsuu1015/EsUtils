@@ -19,16 +19,20 @@ FOUNDATION_EXPORT const unsigned char EsUtilsVersionString[];
 
 #import <EsUtils/DesignMgr.h>
 #import <EsUtils/DefaultAlert.h>
-#import <EsUtils/DeviceMgr.h>
 #import <EsUtils/Utils.h>
 #import <EsUtils/ConvertMgr.h>
+#import <EsUtils/DeviceMgr.h>
+#import <EsUtils/AppMgr.h>
+#import <EsUtils/NetworkMgr.h>
+#import <EsUtils/DateMgr.h>
 #import <EsUtils/AuthMgr.h>
 #import <EsUtils/FileMgr.h>
 #import <EsUtils/UserDefaultsMgr.h>
 #import <EsUtils/EncAES.h>
 #import <EsUtils/EncRSA.h>
 #import <EsUtils/EncUtil.h>
-#import <EsUtils/JsonMgr.h>
+#import <EsUtils/JSONMgr.h>
 #import <EsUtils/HttpMgr.h>
+#import <EsUtils/HttpUtil.h>
 #import <EsUtils/DBMgr.h>
 #import <EsUtils/ErrorMgr.h>

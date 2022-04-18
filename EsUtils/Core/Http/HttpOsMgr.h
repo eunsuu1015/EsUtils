@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HttpOsMgr : NSObject
+@interface HttpOSMgr : NSObject
 
 /// 파라미터가 String 형식 (JSON)
 +(void)postJSONString:(NSString*)url param:(NSString*)param header:(nullable NSDictionary*)header timeout:(int)timeout urlSession:(nullable id <NSURLSessionDelegate>)urlSession

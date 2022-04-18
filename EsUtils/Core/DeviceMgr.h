@@ -21,7 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 +(CGFloat)getDeviceHeightSize;
 
 
-
 #pragma mark - 디바이스 정보
 
 /// 디바이스 OS 버전 조회

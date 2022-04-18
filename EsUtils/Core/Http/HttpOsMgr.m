@@ -6,12 +6,12 @@
 //  Copyright © 2021 ParkEunSu. All rights reserved.
 //
 
-#import "HttpOsMgr.h"
+#import "HttpOSMgr.h"
 #import "Utils.h"
-#import "JsonMgr.h"
-#import "HttpUtls.h"
+#import "JSONMgr.h"
+#import "HttpUtil.h"
 
-@implementation HttpOsMgr
+@implementation HttpOSMgr
 
 #pragma mark - POST
 
@@ -42,7 +42,7 @@
     NSData *dataParam = nil;
     if (param != nil) {
         NSMutableDictionary *mutableDicParam = [param mutableCopy];
-        NSString *strParam = [HttpUtls dicToJson:mutableDicParam];
+        NSString *strParam = [JSONMgr dicToJson:mutableDicParam];
         dataParam = [strParam dataUsingEncoding:NSUTF8StringEncoding];
     }
     
@@ -66,7 +66,7 @@
 }
 
 
-#pragma mark - 최종적으로 호출하는 공통 함수
+#pragma mark - 공통
 
 +(void)post:(NSString *)url param:(NSData *)param isJson:(BOOL)isJson header:(nullable NSDictionary*)header timeout:(int)timeout urlSession:(nullable id <NSURLSessionDelegate>)urlSession
     success:(void (^)(id responseObject))success
@@ -76,10 +76,10 @@
     [urlRequest setTimeoutInterval:timeout];
     [urlRequest setHTTPMethod:@"POST"];
     
-    NSMutableDictionary *dicHeader = [HttpUtls setDefaultDic:isJson];
+    NSMutableDictionary *dicHeader = [HttpUtil setDefaultDic:isJson];
     [dicHeader addEntriesFromDictionary:header];
     
-    urlRequest = [HttpUtls addOsHeader:dicHeader urlRequest:urlRequest];
+    urlRequest = [HttpUtil addOsHeader:dicHeader urlRequest:urlRequest];
     
     if (param != nil) {
         [urlRequest setHTTPBody:param];

@@ -14,12 +14,14 @@
 
 #pragma mark - enc
 
+/// AES 암호화
 +(NSString*)encryptString:plainText key:(NSString*)key iv:(char*)iv  keySize:(int)keySize {
     NSData *plainData = [EncUtil encodeUTF8:plainText];
     NSData *result = [self encrypt:plainData keys:key iv:iv keySize:keySize];
     return [EncUtil encodeB64ToString:result];
 }
 
+/// AES 암호화
 +(NSData*)encrypt:(NSData*)plainText keys:(NSString*)key iv:(char*)iv keySize:(int)keySize {
     if (key == nil) {
         [ErrorMgr.sharedInstance setErrCode:ERROR_NULL_KEY];
@@ -46,13 +48,13 @@
     NSData *valueData = plainText;
     
     NSUInteger dataLength = [valueData length];
-    //    size_t     bufferSize = dataLength + kCCBlockSizeAES128;  // 200727 keySize로 변경
+    //    size_t     bufferSize = dataLength + kCCBlockSizeAES128;  // keySize로 변경
     size_t     bufferSize = dataLength + keySize;
     void      *buffer     = malloc(bufferSize);
     //    const unsigned char iv[] = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
     
     CCCryptorStatus result = CCCrypt( kCCEncrypt,
-                                     //                                     kCCAlgorithmAES128,  // 200727 keySize로 변경
+                                     //                                     kCCAlgorithmAES128,  // keySize로 변경
                                      keySize,
                                      kCCOptionPKCS7Padding,
                                      keyPtr,
@@ -62,11 +64,9 @@
                                      buffer, bufferSize,
                                      &numBytesEncrypted );
     
-    if( result == kCCSuccess )
+    if (result == kCCSuccess)
         return [NSData dataWithBytesNoCopy:buffer length:numBytesEncrypted];
     else
-        // KSLOG_DEBUG(@"암호화 실패");
-        
         free(buffer);
     return nil;
 }
@@ -81,7 +81,6 @@
 }
 
 +(NSData*)decrypt:(NSData*)encText key:(NSString*)key iv:(char*)iv keySize:(int)keySize {
-    
     if (key == nil) {
         [ErrorMgr.sharedInstance setErrCode:ERROR_NULL_KEY];
         return nil;
@@ -106,14 +105,14 @@
     NSData *valueData = encText;
     
     NSUInteger dataLength     = [valueData length];
-    //    size_t     bufferSize     = dataLength + kCCBlockSizeAES128;  // 200727 keySize로 변경
+    //    size_t     bufferSize     = dataLength + kCCBlockSizeAES128;  // keySize로 변경
     size_t     bufferSize     = dataLength + keySize;
     void      *buffer_decrypt = malloc(bufferSize);
     //    const unsigned char iv[] = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
     
     size_t numBytesDecrypted    = 0x00;
     CCCryptorStatus result = CCCrypt( kCCDecrypt,
-                                     //                                     kCCAlgorithmAES128,  // 200727 keySize로 변경
+                                     //                                     kCCAlgorithmAES128,  // keySize로 변경
                                      keySize,
                                      kCCOptionPKCS7Padding,
                                      keyPtr,
@@ -123,11 +122,9 @@
                                      buffer_decrypt, bufferSize,
                                      &numBytesDecrypted );
     
-    if( result == kCCSuccess )
+    if (result == kCCSuccess)
         return [NSData dataWithBytesNoCopy:buffer_decrypt length:numBytesDecrypted];
     else
-        //       // KSLOG_DEBUG(@"복호화 실패");
-        
         return nil;
 }
 

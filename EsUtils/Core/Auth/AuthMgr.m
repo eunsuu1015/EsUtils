@@ -13,8 +13,7 @@
 
 #pragma mark - TouchID, FaceID 체크
 
-/// TouchID/FaceID 사용 가능한지 여부 체크
-/// 단순 가능/불가능 여부만 체크
+/// TouchID/FaceID 사용 가능한지 여부
 +(BOOL)isAvailableBio {
     BOOL result = NO;
     @try {
@@ -26,7 +25,6 @@
         }
     } @catch (NSException *exception) {
         NSLog(@"%s exception : %@", __FUNCTION__, exception.description);
-        result = NO;
     }
     return result;
 }
@@ -42,44 +40,36 @@
         NSError *authError = nil;
         
         if ([myContext canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&authError]) {
-            NSLog(@"%s TouchID/FaceID 사용 가능", __FUNCTION__);
+            // 사용 가능
             state = 1;
-            
         } else {
-            NSLog(@"%s TouchID/FaceID 사용 불가능", __FUNCTION__);
+            // 사용 불가능
             state = (int)authError.code;
             switch (state) {
                 case kLAErrorPasscodeNotSet:
-                    // 암호 설정되지 않음
-                    NSLog(@"%s -5. 설정된 암호가 없음", __FUNCTION__);
+                    // 암호가 설정되지 않음
                     break;
                     
                 case kLAErrorTouchIDNotAvailable:   // -6
-                    // faceID 권한 비허용
-                    NSLog(@"%s -6 FaceID 권한 비허용", __FUNCTION__);
+                    // faceID 권한 비허용 상태
                     break;
                     
                 case kLAErrorTouchIDNotEnrolled:    // -7
-                    // touchID, faceID 등록된거 없음
-                    NSLog(@"%s -7. 등록된 TouchID/FaceID 없음", __FUNCTION__);
+                    // touchID, faceID 등록되지 않음
                     break;
                     
                 case kLAErrorTouchIDLockout:    // -8
                     // touchID, faceID 비활성화 상태
-                    NSLog(@"%s -8 TouchID/FaceID 비활성화 상태", __FUNCTION__);
                     break;
             }
         }
     } @catch (NSException *exception) {
         NSLog(@"%s exception : %@", __FUNCTION__, exception.description);
-        state = 0;
     }
     return state;
 }
 
 /// FaceID/TouchID 여부
-/// return YES : FaceID
-/// return NO : TouchID
 +(BOOL)isFaceID {
     BOOL result = NO;
     @try {
@@ -87,7 +77,6 @@
         NSError *authError = nil;
         
         if ([myContext canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&authError]) {
-            
             if (@available(iOS 11.0, *)) {
                 int type = myContext.biometryType;
                 if (type == LABiometryTypeFaceID) {
@@ -112,14 +101,11 @@
         }
     } @catch (NSException *exception) {
         NSLog(@"%s exception : %@", __FUNCTION__, exception.description);
-        result = NO;
     }
     return result;
 }
 
 /// Bio 인증 진행. TouchID/FaceID 창 출력
-/// @param guideText TouchID 설명 문구. nil일 경우 default 문구 출력 (FaceID는 설명 문구 없음)
-/// @param finishHandler 인증 완료 시 핸들러
 +(void)performBioAuth:(NSString*)guideText finishHandler:(void (^)(int resultCode))finishHandler {
     @try {
         if (guideText != nil) {
@@ -135,17 +121,14 @@
         if ([myContext canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&authError]) {
             [myContext evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:myLocalizedReasonString reply:^(BOOL success, NSError *error) {
                 if (success) {
-                    NSLog(@"%s end. return : 1", __FUNCTION__);
                     finishHandler(1);
                 } else {
-                    NSLog(@"%s end. return : %d", __FUNCTION__, (int)error.code);
                     finishHandler((int)error.code);
                 }
             }];
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
                 //Touch ID 비활성화됨
-                NSLog(@"%s end. return : %d", __FUNCTION__, (int)authError.code);
                 finishHandler((int)authError.code);
             });
         }

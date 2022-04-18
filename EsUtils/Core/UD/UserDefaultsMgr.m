@@ -46,30 +46,52 @@
 /// @param key 키
 /// @param value 값
 +(void)setInt:(NSString*)key value:(int)value {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setInteger:(NSInteger)value forKey:key];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    @try {
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults setInteger:(NSInteger)value forKey:key];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } @catch (NSException *exception) {
+        NSLog(@"exception : %@", exception.description);
+    }
 }
 
 /// 조회 Int
 /// @param key 키
 +(int)getInt:(NSString*)key {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSInteger getData = [userDefaults integerForKey:key];
-    return (int)getData;
+    @try {
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        NSInteger getData = [userDefaults integerForKey:key];
+        return (int)getData;
+    } @catch (NSException *exception) {
+        NSLog(@"exception : %@", exception.description);
+    }
 }
 
 
 #pragma mark - BOOL
 
+/// 저장 Bool
+/// @param key 키
+/// @param value 값
 +(void)setBool:(NSString*)key value:(BOOL)value {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setBool:value forKey:key];
+    @try {
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults setBool:value forKey:key];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } @catch (NSException *exception) {
+        NSLog(@"exception : %@", exception.description);
+    }
 }
 
+/// 조회 Bool
+/// @param key 키
 +(BOOL)getBool:(NSString*)key {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    return [userDefaults boolForKey:key];
+    @try {
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        return [userDefaults boolForKey:key];
+    } @catch (NSException *exception) {
+        NSLog(@"exception : %@", exception.description);
+    }
 }
 
 

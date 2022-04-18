@@ -11,18 +11,14 @@
 NS_ASSUME_NONNULL_BEGIN
 
 //#ifdef DEBUG
-//#define LOG_START   NSLog(@"start", __PRETTY_FUNCTION__, __LINE__);
-//#define LOG_END     NSLog(@"end", __PRETTY_FUNCTION__, __LINE__);
-//#define NSLog(fmt, ...) NSLog((@"%s[%d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#define NSLog(fmt, ...) NSLog((@"%s[%d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 //#else
-//    #define LOG_START
-//    #define LOG_END
-    #define NSLog(...)
+//    #define NSLog(...)
 //#endif
 
 #pragma mark - Flag Value
 
-static BOOL IS_DEBUG_LOG = YES; // 로그 출력 여부 / 빌드 시 NO
+static BOOL IS_DEBUG_LOG = YES; // 로그 출력 여부
 
 #pragma mark - 상수
 
