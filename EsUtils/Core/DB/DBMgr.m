@@ -241,7 +241,7 @@ const NSString *INT_VALUE = @"INT_VALUE";
         while (sqlite3_step(stmt) == SQLITE_ROW) {
             @try {
                 const char *value = sqlite3_column_text(stmt, 0);
-                result = [NSString stringWithFormat:@"%s", value];
+                result = [NSString stringWithUTF8String:value];
                 break;
             } @catch (NSException *e) {
             }
@@ -306,7 +306,7 @@ const NSString *INT_VALUE = @"INT_VALUE";
                 int intVal = sqlite3_column_int(stmt, 2);
                 
                 dic[INDEX] = [NSString stringWithFormat:@"%d", index];
-                dic[STRING_VALUE] = [NSString stringWithFormat:@"%s", strVal];
+                dic[STRING_VALUE] = [NSString stringWithUTF8String:strVal];
                 dic[INT_VALUE] = [NSString stringWithFormat:@"%d", intVal];
                 
             } @catch (NSException *e) {
@@ -318,6 +318,55 @@ const NSString *INT_VALUE = @"INT_VALUE";
     [self close];
     return dic;
 }
+
+#pragma mark - Delete
+
+- (BOOL)deleteAt:(int)index {
+    if (![self existDbFile]) {
+        return NO;
+    }
+    
+    // 디비 파일 오픈 실패
+    if ([self open] != SQLITE_OK) {
+        return NO;
+    }
+    
+    NSString *querySQL = [NSString stringWithFormat:@"DELETE FROM %@ WHERE %@=%d", TABLE_NAME, INDEX, index];
+    const char *query_stmt = [querySQL UTF8String];
+    char *errMsg;
+    
+    if (sqlite3_exec(_sql, query_stmt, NULL, NULL, &errMsg) == SQLITE_OK) {
+        [self close];
+    } else {
+        [self close];
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)deleteAll {
+    if (![self existDbFile]) {
+        return NO;
+    }
+    
+    // 디비 파일 오픈 실패
+    if ([self open] != SQLITE_OK) {
+        return NO;
+    }
+    
+    NSString *querySQL = [NSString stringWithFormat:@"DELETE FROM %@",TABLE_NAME];
+    const char *query_stmt = [querySQL UTF8String];
+    char *errMsg;
+    
+    if (sqlite3_exec(_sql, query_stmt, NULL, NULL, &errMsg) == SQLITE_OK) {
+        [self close];
+    } else {
+        [self close];
+        return NO;
+    }
+    return YES;
+}
+
 
 /// 저장된 데이터 있는지 조회
 -(BOOL)isExist:(NSString *)key index:(int)index {
