@@ -49,6 +49,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param viewId 원모양으로 만들 뷰
 +(void)makeCircle:(id)viewId;
 
+/// 뷰 테두리 추가
+/// @param viewId 테두리 추가할 뷰
+/// @param width 테두리 두께
+/// @param color 테두리 색상
++(void)setBorderLine:(UIView*)viewId width:(int)width color:(UIColor*)color;
+
 /// 그라데이션 추가
 /// @param viewId 뷰
 /// @param isVertical YES : 세로 그라데이션, NO : 가로 그라데이션

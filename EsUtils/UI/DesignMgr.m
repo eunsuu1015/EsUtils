@@ -92,6 +92,14 @@
     }
 }
 
+/// 뷰 테두리 추가
+/// @param width 테두리 두께
++(void)setBorderLine:(UIView*)viewId width:(int)width color:(UIColor*)color {
+    viewId.clipsToBounds = YES;
+    viewId.layer.borderWidth = width;
+    viewId.layer.borderColor = color.CGColor;
+}
+
 /// 그라데이션 추가
 +(void)setGradient:(id)viewId isVertical:(BOOL)isVertical firstColor:(UIColor*)firstColor secondColor:(UIColor*)secondColor {
     @try {
