@@ -2,8 +2,8 @@
 //  EncUtil.m
 //  Framework_Core
 //
-//  Created by Authlabs on 2020/07/28.
-//  Copyright © 2020 Authlabs. All rights reserved.
+//  Created by ParkEunSu on 2020/07/28.
+//  Copyright © 2020 ParkEunSu. All rights reserved.
 //
 
 #import "EncUtil.h"

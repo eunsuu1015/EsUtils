@@ -11,12 +11,14 @@
 		2D7B748B273A36270012A105 /* ErrorMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7B7489273A36270012A105 /* ErrorMgr.m */; };
 		2D7B749F273BBDC70012A105 /* DateMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D7B749D273BBDC70012A105 /* DateMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2D7B74A0273BBDC70012A105 /* DateMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7B749E273BBDC70012A105 /* DateMgr.m */; };
+		2DD6057F28604FD1005159E4 /* FileMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DD6057D28604FD1005159E4 /* FileMgr.h */; };
+		2DD6058028604FD1005159E4 /* FileMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DD6057E28604FD1005159E4 /* FileMgr.m */; };
 		2DF1C0F4280D5F0C007F9A90 /* AppMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DF1C0F2280D5F0C007F9A90 /* AppMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2DF1C0F5280D5F0C007F9A90 /* AppMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF1C0F3280D5F0C007F9A90 /* AppMgr.m */; };
 		2DF1C0F8280D60CF007F9A90 /* NetworkMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DF1C0F6280D60CF007F9A90 /* NetworkMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2DF1C0F9280D60CF007F9A90 /* NetworkMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF1C0F7280D60CF007F9A90 /* NetworkMgr.m */; };
-		FA088AFF2459E53200F7808D /* FileMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = FA088AEE2459E53200F7808D /* FileMgr.m */; };
-		FA088B002459E53200F7808D /* FileMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = FA088AEF2459E53200F7808D /* FileMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FA088AFF2459E53200F7808D /* KeyedArchiverMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = FA088AEE2459E53200F7808D /* KeyedArchiverMgr.m */; };
+		FA088B002459E53200F7808D /* KeyedArchiverMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = FA088AEF2459E53200F7808D /* KeyedArchiverMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA088B012459E53200F7808D /* UserDefaultsMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = FA088AF12459E53200F7808D /* UserDefaultsMgr.m */; };
 		FA088B022459E53200F7808D /* UserDefaultsMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = FA088AF22459E53200F7808D /* UserDefaultsMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA088B052459E53200F7808D /* JSONMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = FA088AF72459E53200F7808D /* JSONMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -74,12 +76,14 @@
 		2D7B7489273A36270012A105 /* ErrorMgr.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ErrorMgr.m; sourceTree = "<group>"; };
 		2D7B749D273BBDC70012A105 /* DateMgr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateMgr.h; sourceTree = "<group>"; };
 		2D7B749E273BBDC70012A105 /* DateMgr.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DateMgr.m; sourceTree = "<group>"; };
+		2DD6057D28604FD1005159E4 /* FileMgr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileMgr.h; sourceTree = "<group>"; };
+		2DD6057E28604FD1005159E4 /* FileMgr.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileMgr.m; sourceTree = "<group>"; };
 		2DF1C0F2280D5F0C007F9A90 /* AppMgr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppMgr.h; sourceTree = "<group>"; };
 		2DF1C0F3280D5F0C007F9A90 /* AppMgr.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppMgr.m; sourceTree = "<group>"; };
 		2DF1C0F6280D60CF007F9A90 /* NetworkMgr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkMgr.h; sourceTree = "<group>"; };
 		2DF1C0F7280D60CF007F9A90 /* NetworkMgr.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkMgr.m; sourceTree = "<group>"; };
-		FA088AEE2459E53200F7808D /* FileMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileMgr.m; sourceTree = "<group>"; };
-		FA088AEF2459E53200F7808D /* FileMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileMgr.h; sourceTree = "<group>"; };
+		FA088AEE2459E53200F7808D /* KeyedArchiverMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyedArchiverMgr.m; sourceTree = "<group>"; };
+		FA088AEF2459E53200F7808D /* KeyedArchiverMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyedArchiverMgr.h; sourceTree = "<group>"; };
 		FA088AF12459E53200F7808D /* UserDefaultsMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaultsMgr.m; sourceTree = "<group>"; };
 		FA088AF22459E53200F7808D /* UserDefaultsMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefaultsMgr.h; sourceTree = "<group>"; };
 		FA088AF72459E53200F7808D /* JSONMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONMgr.h; sourceTree = "<group>"; };
@@ -208,8 +212,10 @@
 		FA088AED2459E53200F7808D /* File */ = {
 			isa = PBXGroup;
 			children = (
-				FA088AEF2459E53200F7808D /* FileMgr.h */,
-				FA088AEE2459E53200F7808D /* FileMgr.m */,
+				FA088AEF2459E53200F7808D /* KeyedArchiverMgr.h */,
+				FA088AEE2459E53200F7808D /* KeyedArchiverMgr.m */,
+				2DD6057D28604FD1005159E4 /* FileMgr.h */,
+				2DD6057E28604FD1005159E4 /* FileMgr.m */,
 			);
 			path = File;
 			sourceTree = "<group>";
@@ -359,9 +365,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA8266542737C1A100993E4B /* AFURLSessionManager.h in Headers */,
+				2DD6057F28604FD1005159E4 /* FileMgr.h in Headers */,
 				FA82662B2737BBD100993E4B /* ConvertMgr.h in Headers */,
 				FA8266232737BB0900993E4B /* DefaultAlert.h in Headers */,
-				FA088B002459E53200F7808D /* FileMgr.h in Headers */,
+				FA088B002459E53200F7808D /* KeyedArchiverMgr.h in Headers */,
 				FA8266372737BCF000993E4B /* EncUtil.h in Headers */,
 				FA82662F2737BC0B00993E4B /* AuthMgr.h in Headers */,
 				FA088B0A2459E53200F7808D /* DBMgr.h in Headers */,
@@ -464,11 +471,12 @@
 				FA8266282737BB5600993E4B /* DeviceMgr.m in Sources */,
 				FA8266572737C1A100993E4B /* AFHTTPSessionManager.m in Sources */,
 				FA82665D2737C1A100993E4B /* AFSecurityPolicy.m in Sources */,
-				FA088AFF2459E53200F7808D /* FileMgr.m in Sources */,
+				FA088AFF2459E53200F7808D /* KeyedArchiverMgr.m in Sources */,
 				FA82661F2737B9A300993E4B /* DesignMgr.m in Sources */,
 				FA8266302737BC0B00993E4B /* AuthMgr.m in Sources */,
 				2DF1C0F5280D5F0C007F9A90 /* AppMgr.m in Sources */,
 				2DF1C0F9280D60CF007F9A90 /* NetworkMgr.m in Sources */,
+				2DD6058028604FD1005159E4 /* FileMgr.m in Sources */,
 				2D7B74A0273BBDC70012A105 /* DateMgr.m in Sources */,
 				FA8266592737C1A100993E4B /* AFURLSessionManager.m in Sources */,
 				FA8266242737BB0900993E4B /* DefaultAlert.m in Sources */,

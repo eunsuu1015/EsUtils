@@ -1,9 +1,9 @@
 //
 //  FileMgr.h
-//  ViewCollect
+//  EsUtils
 //
-//  Created by Authlabs on 2020/04/24.
-//  Copyright © 2020 Authlabs. All rights reserved.
+//  Created by ParkEunSu on 2022/06/20.
+//  Copyright © 2022 ParkEunSu. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -12,39 +12,32 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FileMgr : NSObject
 
-/// 파일명과 함께 초기화
-/// @param name 파일 이름
--(id)initWithFileName:(NSString*)name;
+/// 이미지 파일 저장
+/// @param image 이미지
+/// @param name 파일명 (확장자 미포함 시 jpg로 강제 설정)
+- (BOOL)saveImage:(UIImage *)image fileName:(NSString *)name;
 
-/// 파일 패스를 파일명으로 설정
--(NSString*)setFilePath:(NSString*)fileName;
+/// 저장된 이미지 파일 가져오기
+/// @param name 이미지 파일명 (확장자 미포함 시 jpg로 강제 설정)
+- (UIImage*)getImage:(NSString*)name;
 
-#pragma mark - Save
+/// 이미지 파일 삭제
+/// @param name 이미지 파일명 (확장자 미포함 시 jpg로 강제 설정)
+- (BOOL)removeImage:(NSString *)name;
 
-/// DEFAULT_FILE_KEY에 값 저장
-/// FILE은 초기화 시 설정한 파일 (없으면 default 파일)
-/// @param value 저장할 값
-/// @param isAppend YES : 이전 데이터에 내용 추가, NO : 새로운 데이터로 덮기
--(BOOL)saveFile:(NSString*)value isAppend:(BOOL)isAppend;
+#pragma mark - Common
 
-/// 파일에 데이터 저장
-/// FILE은 초기화 시 설정한 파일 (없으면 default 파일)
-/// @param key 저장 키
-/// @param value 저장할 값
-/// @param isAppend YES : 이전 데이터에 내용 추가, NO : 새로운 데이터로 덮기
--(BOOL)saveFileKey:(NSString*)key value:(NSString*)value isAppend:(BOOL)isAppend;
+/// 파일 저장
+/// @param data 저장할 데이터
+/// @param fileName 파일명 (확장자 포함)
+- (BOOL)saveData:(NSData *)data fileName:(NSString *)fileName;
 
+/// 저장된 파일 가져오기
+/// @param fileName 파일명 (확장자 포함)
+- (NSData *)getData:(NSString*)fileName;
 
-#pragma mark - Load
-
-/// DEFAULT_FILE_KEY에서 값 가져옴
-/// FILE은 초기화 시 설정한 파일 (없으면 default 파일)
--(NSString*)loadFile;
-
-/// key에서 값 가져옴
-/// FILE은 초기화 시 설정한 파일 (없으면 default 파일)
-/// @param key 조회할 키
--(NSString*)loadFileKey:(NSString*)key;
+/// 파일 삭제
+- (BOOL)removeData:(NSString *)fileName;
 
 @end
 

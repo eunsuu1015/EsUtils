@@ -2,8 +2,8 @@
 //  HttpCommManager.h
 //  AllTestProj
 //
-//  Created by Authlabs on 04/11/2019.
-//  Copyright © 2019 Authlabs. All rights reserved.
+//  Created by ParkEunSu on 04/11/2019.
+//  Copyright © 2019 ParkEunSu. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

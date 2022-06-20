@@ -2,8 +2,8 @@
 //  Constants.h
 //  KhnpAuthApp
 //
-//  Created by Authlabs on 2020/01/13.
-//  Copyright © 2020 Authlabs. All rights reserved.
+//  Created by ParkEunSu on 2020/01/13.
+//  Copyright © 2020 ParkEunSu. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
